@@ -1,0 +1,12 @@
+{
+    "_comment": "helifox - mvc framework uses dependencies from https://packagist.org/",
+    "require": {
+        "phpmailer/phpmailer": "^6.0",
+        "fzaninotto/faker": "^1.8",
+        "respect/validation": "^1.1",
+        "joshtronic/php-loremipsum": "^1.0",
+        "tracy/tracy": "^2.6",
+        "suin/php-rss-writer": "^1.6",
+        "phpmd/phpmd": "3.x-dev"
+    }
+}

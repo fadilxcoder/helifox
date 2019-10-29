@@ -1,0 +1,5 @@
+/.php_cs.cache
+/composer.lock
+/Thumbs.db
+/vendors
+/.idea
