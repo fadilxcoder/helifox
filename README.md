@@ -16,6 +16,7 @@
     <li> Create a virtual host in apache (locally)</li>
     <li> Point virtual host url `<strong>http://helifox.local/</strong>` to folder `<strong>helifox_project_name/public/</strong>`</li>
     <li> Change `<strong>URL</strong>` in`<strong>helifox_project_name/configuration/settings.php</strong>` file.</li>
+    <li> Install dependencies, `<strong>composer install</strong>`</li>
 </ul>
 <hr>
 <h2>What's included</h2>

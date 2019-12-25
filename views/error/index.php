@@ -62,7 +62,6 @@
             <div class="content">
                 <div class="title">
                     <p>404</p>
-                    <p>ERROR</p>
                     <p>PAGE NOT FOUND</p>
                     <img src="<?php echo URL?>assets/images/helifox-logo.png" class="img-responsive" alt="logo">
                 </div>

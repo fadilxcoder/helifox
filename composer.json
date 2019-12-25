@@ -1,17 +1,15 @@
 {
-    "_comment": "helifox - mvc framework uses dependencies from https://packagist.org/",
     "require": {
-        "phpmailer/phpmailer": "^6.0",
+        "phpmailer/phpmailer": "^6.1",
         "respect/validation": "^1.1",
-        "joshtronic/php-loremipsum": "^1.0",
         "suin/php-rss-writer": "^1.6",
-        "swiftmailer/swiftmailer": "^6.2",
-        "league/plates": "^3.3"
+        "league/plates": "^3.3",
+        "nojacko/email-validator": "^1.1"
     },
     "require-dev": {
         "tracy/tracy": "^2.7",
         "fzaninotto/faker": "^1.9",
-        "phpmd/phpmd": "^2.7",
+        "phpmd/phpmd": "^2.8",
         "squizlabs/php_codesniffer": "^3.5",
         "friendsofphp/php-cs-fixer": "^2.16"
     }

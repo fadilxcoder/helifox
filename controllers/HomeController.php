@@ -8,9 +8,6 @@ class HomeController extends Controller{
     public function __construct()
     {
         parent::__construct();
-        /*
-        *    Loading Home Model Class in order to use predefined methods
-        */
         $this->model->call('Home');
         $this->hm = new Home;
     }
@@ -21,23 +18,23 @@ class HomeController extends Controller{
     *
     *    function index()
     *    {
-    *        $this->view->list_user = $this->hm->select('users', 'OBJECT_CON');     ------    Calling select method from model : list_user
-    *        $this->view->msg = '#MVC Framework';                                   ------    Sending String msg
-    *        $this->view->render('home-page',false);                                ------    if view has header/footer on same page, use true,
-    *                                                                                         else it is included, use false.
+    *       $this->view->render('helifox-landing-page', [                           --- Rendering view by using templating engine
+    *           'msg'           => '#MVC Framework',                                --- Sending variable of type String : msg
+    *           'list_user'     => $this->hm->selectAll('tbl_name', 'OBJECT_CON')   --- Calling select method from model : list_user
+    *       ]);
     *    }
     *
     */
 
     public function index()
     {
-        $this->view->msg = '#MVC Framework';
-        $this->view->render('helifox-landing-page',true);
+        $this->view->render('helifox-landing-page', [
+            'msg' => '#MVC Framework'
+        ]);
     }
 
     public function __404()
     {
-        $this->view->msg = 'PAGE NOT FOUND';
-        $this->view->render('error/index', true);
+        $this->view->render('error/index');
     }
 }

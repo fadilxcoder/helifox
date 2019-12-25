@@ -57,16 +57,16 @@ if ( ! function_exists('generate_random_alphanumeric_string'))
     }
 }
 
-if( ! function_exists('_string_normalization'))
+if( ! function_exists('string_normalization'))
 {
     /*
-    *    function _string_normalization return a string with no special characters
+    *    function string_normalization return a string with no special characters
     *
     *    $normalString = 'Vous êtes employé';
-    *    $normalizeString = _string_normalization($normalString,'-');
+    *    $normalizeString = string_normalization($normalString,'-');
     *    --> Vous-etes-employe
     */
-    function _string_normalization( $string, $delimiter )
+    function string_normalization( $string, $delimiter )
     {
         $unwanted = array(
             'Š'=>'S', 'š'=>'s', 'Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A', 'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E',

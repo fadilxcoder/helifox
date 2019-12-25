@@ -24,15 +24,11 @@ namespace Library;
 
 class View
 {
-    public function render($name, $include = false)
+    public function render($view, $vars = [])
     {
-        if($include == true):
-            require __DIR__.'/../views/'.$name.'.php';
-        else:
-            require __DIR__.'/../views/inc/header.php';
-            require __DIR__.'/../views/'.$name.'.php';
-            require __DIR__.'/../views/inc/footer.php';
-        endif;
+        $templates = new \League\Plates\Engine('../views');
+        echo $templates->render($view, $vars);
         exit; // No futher codes should be added below the rendering.
+
     }
 }

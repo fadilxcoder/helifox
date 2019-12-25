@@ -29,11 +29,15 @@ require __DIR__.'/../configuration/settings.php';
 require __DIR__.'/../configuration/functions.php';
 
 /*
- * If your application will be using composer and dependencies, simply require it
- * into the script here so that we don't have to worry about manual
- * loading any of our classes later on. It feels great to relax.
+ * If your application will be using composer and dependencies
  */
-#require __DIR__.'/../vendor/autoload.php';
+if (file_exists(__DIR__.'/../vendor/autoload.php')):
+	require __DIR__.'/../vendor/autoload.php';
+else:
+	header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
+	echo 'Did you install the dependencies ? ☺';
+	exit(1); // EXIT_ERROR
+endif;
 
 use \Library\Core as Core;
 

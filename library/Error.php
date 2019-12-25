@@ -33,6 +33,6 @@ class Error{
     public function index()
     {
         $this->view = new View;
-        $this->view->render('error/index', true);
+        $this->view->render('error/index');
     }
 }
