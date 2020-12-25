@@ -23,16 +23,16 @@
 /*
 *   Define the base url of the project
 */
-define('URL', 'http://helifox.local/');
+define('URL', 'http://localhost:8881/');
 
 /*
 *   Database configuration. Set ACTIVATE to TRUE if project will be using MySQL DATABASE and fill connection details.
 */
-define('ACTIVATE',  'FALSE');
-define('HOST',      '');
-define('USERNAME',  '');
-define('PASSWORD',  '');
-define('DATABASE',  '');
+define('ACTIVATE',  'TRUE');
+define('HOST',      'database');
+define('USERNAME',  'myuser');
+define('PASSWORD',  'secret');
+define('DATABASE',  'mydb');
 
 /*
 * DEFINE ENVIRONMENT, Allowed environments variables : development / production

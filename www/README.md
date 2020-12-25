@@ -1,10 +1,22 @@
 <h1>HELIFOX #MVC FRAMEWORK v3.3</h1>
-<p>A Light & Cunning MVC Micro Framework, built for PHP developers to create web apps. - &copy;  <a href="https://goo.gl/EbHMQX" target="_blank">fadilxcoder</a></p>
+<p>A Light & Cunning MVC Framework, built for PHP developers to create web apps. - &copy;  <a href="https://goo.gl/EbHMQX" target="_blank">fadilxcoder</a></p>
 <hr>
-<h2>Using the framework (DOCKER)</h2>
+<h2>Overview</h2>
 <ul>
-    <li> Build docker images (docker-compose up -d --build)</li>
-    <li> Connect to docker terminal (docker exec -it fx_php_fpm ash) & install dependencies, `<strong>composer install</strong>`</li>
+    <li> PHP VERSION >= 7.2 </li>
+    <li> Uses Hash Argon2i , <i>Note that Argon2i hashing algorithm is not supported in some shared servers because it needs python 3.4</i> </li>
+    <li> Uses PSR-4 autoloading standard</li>
+    <li> Uses PSR-2 coding standard</li>
+    <li> <strong>mod_rewrite</strong> MUST be enable </li>
+    <li> Dependencies need to be downloaded by composer</li>
+</ul>
+<hr>
+<h2>Using the framework</h2>
+<ul>
+    <li> Create a virtual host in apache (locally)</li>
+    <li> Point virtual host url `<strong>http://helifox.local/</strong>` to folder `<strong>helifox_project_name/public/</strong>`</li>
+    <li> Change `<strong>URL</strong>` in`<strong>helifox_project_name/configuration/settings.php</strong>` file.</li>
+    <li> Install dependencies, `<strong>composer install</strong>`</li>
 </ul>
 <hr>
 <h2>What's included</h2>

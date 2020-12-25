@@ -2,14 +2,20 @@
 
 use \Library\Controller as Controller;
 use \Models\Home as Home;
+use Tracy\Debugger as Debugger;
+use Faker\Factory as Factory;
 
-class HomeController extends Controller{
+class HomeController extends Controller {
+
+    private $faker;
 
     public function __construct()
     {
         parent::__construct();
         $this->model->call('Home');
         $this->hm = new Home;
+        Debugger::enable(Debugger::DEVELOPMENT);
+        $this->faker = Factory::create();
     }
 
     /*
@@ -31,6 +37,11 @@ class HomeController extends Controller{
         $this->view->render('helifox-landing-page', [
             'msg' => '#MVC Framework'
         ]);
+    }
+
+    public function testingUrl()
+    {
+        dump($_SERVER);
     }
 
     public function __404()

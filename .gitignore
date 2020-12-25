@@ -1,4 +1,2 @@
-/.php_cs.cache
-/Thumbs.db
-/vendor
-/.idea
+/.c9
+/docker/database/data

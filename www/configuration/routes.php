@@ -34,3 +34,4 @@
 */
 $route['default']   = 'HomeController@index';
 $route['home']      = 'HomeController@index';
+$route['testing-url']  = 'HomeController@testingUrl';
