@@ -1,29 +1,10 @@
 <?php
 
-/*
- *  +------------------------------------------+
- *  ¦                 |\__/|                   ¦
- *  ¦                / - - \                   ¦
- *  ¦               /_.~ ~,_\                  ¦
- *  ¦                  \@/                     ¦
- *  ¦------------------------------------------¦
- *  ¦           HELIFOX PHP FRAMEWORK          ¦
- *  ¦------------------------------------------¦
- *  ¦      www.facebook.com/fadil.xcoder       ¦
- *  +------------------------------------------+
- *
- *  HELIFOX MVC FRAMEWORK
- *
- *  A Light & Cunning MVC Framework, built for PHP developers to create web apps.
- *
- * Copyright (c) Wednesday, 13 September 2017 ~ DAY OF THE PROGRAMMER ~ Fadil Rosun-Mungur ~ FADILXCODER
- *
-*/
-
 if ( ! function_exists('IP'))
 {
     /*
-    *    function IP to return a concatenated string of IP address.
+    *    Return a concatenated string of IP.
+    *
     *    $user_ip = IP();
     */
 
@@ -40,7 +21,8 @@ if ( ! function_exists('IP'))
 if ( ! function_exists('generate_random_alphanumeric_string'))
 {
     /*
-    *    function generate_random_alphanumeric_string to return alphanumerical String of a certain range
+    *    Return alphanumerical String of a certain range
+    *
     *    $code = generate_random_alphanumeric_string(11);
     *    --> kI80i7wNXqd
     */
@@ -60,7 +42,7 @@ if ( ! function_exists('generate_random_alphanumeric_string'))
 if( ! function_exists('string_normalization'))
 {
     /*
-    *    function string_normalization return a string with no special characters
+    *    Return a string with no special characters
     *
     *    $normalString = 'Vous êtes employé';
     *    $normalizeString = string_normalization($normalString,'-');
@@ -81,43 +63,10 @@ if( ! function_exists('string_normalization'))
     }
 }
 
-if( ! function_exists('argon'))
-{
-    /*
-    *    function argon return an encrypted string using the Argon2i hashing algorithm
-    *
-    *    echo argon('fadilxcoder') >> $argon2i$v=19$m=2048,t=11,p=7$VWdncmEvSEVwc3FkVnFuaQ$gu/lxoguXwodV21xc/r19HawkvTCGsCCcIRCtrbJ4lY
-    *
-    */
-    function argon($string)
-    {
-        $options = ['memory_cost' => MEMORY_COST, 'time_cost' => TIME_COST, 'threads' => PARALLELISM_FACTOR];
-        $encrypt = password_hash($string, PASSWORD_ARGON2I, $options);
-        return $encrypt;
-    }
-}
-
-if( ! function_exists('encrypt'))
-{
-    /*
-    *    function encrypt return an encrypted string using the bcrypt hashing algorithm
-    *
-    *    echo encrypt('fadilxcoder') >> $2y$10$ThUdBZr9WKrjlr.wRFtxAOQ7wZrkW.mqE9NGT54U90awKctmwX.ja
-    *
-    */
-    function encrypt($string)
-    {
-        $encrypt = password_hash($string, PASSWORD_DEFAULT);
-        return $encrypt;
-    }
-}
-
 if( !function_exists('redirect'))
 {
 	/*
-    *    function redirect will redirect to any URL passed as parameter
-    *
-    *    redirect('https://www.google.com') >> REDIRECT to google.com
+    *    Redirect to any URL passed as parameter
     *
     */
 	function redirect($url)
@@ -126,36 +75,5 @@ if( !function_exists('redirect'))
 		header('Pragma: no-cache');
 		header('Location: ' . $url);
 		exit;
-	}
-}
-
-if( !function_exists('create_cookie'))
-{
-	/*
-    *    function create_cookie will create cookie for the web app
-    *
-    *    $arr = array();
-    *    $arr['_name']      = 'helifox_cookie';
-    *    $arr['_value']     = 'kI80i7wNXqd';
-    *    $arr['_duration']  = time() + (86400 * 30)  # 86400 = 1 day
-    *
-    *    create_cookie($arr);
-    */
-	function create_cookie($arr)
-	{
-		return ( setcookie($arr['_name'], $arr['_value'], $arr['_duration'], "/") );
-	}
-}
-
-if( !function_exists('destroy_cookie'))
-{
-	/*
-    *    function destroy_cookie will destroy a cookie for the web app
-    *
-    *    destroy_cookie('helifox_cookie');
-    */
-	function destroy_cookie($cookie_name)
-	{
-		return ( setcookie($cookie_name, '', time() - 3600, "/") );
 	}
 }

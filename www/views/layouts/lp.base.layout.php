@@ -11,5 +11,6 @@
     </head>
     <body>
     <?php echo $this->section('landingPage') ?>
+    <script src="<?php echo URL ?>assets/js/scripts.js"></script>
     </body>
 </html>
