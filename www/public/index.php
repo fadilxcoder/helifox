@@ -15,7 +15,6 @@ require __DIR__.'/../library/Model.php';
 require __DIR__.'/../library/View.php';
 require __DIR__.'/../library/Database.php';
 require __DIR__.'/../configuration/settings.php';
-require __DIR__.'/../configuration/functions.php';
 
 use \Library\Core as Core;
 

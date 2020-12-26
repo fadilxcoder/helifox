@@ -1,33 +1,24 @@
 <?php
 
-if ( ! function_exists('IP'))
-{
-    /*
-    *    Return a concatenated string of IP.
-    *
-    *    $user_ip = IP();
-    */
+namespace Handler;
 
-    function IP()
+use Symfony\Component\HttpFoundation\Request;
+
+class AppHelper
+{
+    public static function ipAddr() 
     {
-        $HTTP_CLIENT_IP         = isset($_SERVER['HTTP_CLIENT_IP']) ? $_SERVER['HTTP_CLIENT_IP'] : ':/:' ;       # To check ip from share internet
-        $HTTP_X_FORWARDED_FOR   = isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : ':/:';  # To check ip is pass from proxy
-        $REMOTE_ADDR            = $_SERVER['REMOTE_ADDR'];
-        $string = $HTTP_CLIENT_IP.' - '.$HTTP_X_FORWARDED_FOR.' - '.$REMOTE_ADDR;
+        $request = Request::createFromGlobals();
+
+        $HTTP_CLIENT_IP         = (null !== $request->server->get('HTTP_CLIENT_IP')) ? $request->server->get('HTTP_CLIENT_IP') : 'null' ;
+        $HTTP_X_FORWARDED_FOR   = (null !== $request->server->get('HTTP_X_FORWARDED_FOR')) ? $request->server->get('HTTP_X_FORWARDED_FOR') : 'null';
+        $REMOTE_ADDR            = $request->server->get('REMOTE_ADDR');
+        $string                 = $HTTP_CLIENT_IP . '@'.$HTTP_X_FORWARDED_FOR . '@' . $REMOTE_ADDR;
+        
         return $string;
     }
-}
 
-if ( ! function_exists('generate_random_alphanumeric_string'))
-{
-    /*
-    *    Return alphanumerical String of a certain range
-    *
-    *    $code = generate_random_alphanumeric_string(11);
-    *    --> kI80i7wNXqd
-    */
-
-    function generate_random_alphanumeric_string($length = 6)
+    public static function generateRandomAlphaNumericString($length = 6)
     {
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890abcdefghijklmnopqrstivwxyz';
         $charactersLength = strlen($characters);
@@ -35,20 +26,11 @@ if ( ! function_exists('generate_random_alphanumeric_string'))
         for ($i = 0; $i < $length; $i++):
             $randomString .= $characters[rand(0, $charactersLength - 1)];
         endfor;
+
         return $randomString;
     }
-}
 
-if( ! function_exists('string_normalization'))
-{
-    /*
-    *    Return a string with no special characters
-    *
-    *    $normalString = 'Vous êtes employé';
-    *    $normalizeString = string_normalization($normalString,'-');
-    *    --> Vous-etes-employe
-    */
-    function string_normalization( $string, $delimiter )
+    public static function stringNormalizer($string, $delimiter)
     {
         $unwanted = array(
             'Š'=>'S', 'š'=>'s', 'Ž'=>'Z', 'ž'=>'z', 'À'=>'A', 'Á'=>'A', 'Â'=>'A', 'Ã'=>'A', 'Ä'=>'A', 'Å'=>'A', 'Æ'=>'A', 'Ç'=>'C', 'È'=>'E', 'É'=>'E',
@@ -59,21 +41,16 @@ if( ! function_exists('string_normalization'))
             'ü'=>'u',  'ă'=>'a', 'Ă'=>'A', 'ș'=>'s', 'Ș'=>'S', 'ț'=>'t', 'Ț'=>'T');
         $string = strtr( $string, $unwanted );
         $string = preg_replace('/[^A-Za-z0-9\-]/', $delimiter, $string); // Replace special characters with a delimiter.
+
         return $string;
     }
-}
 
-if( !function_exists('redirect'))
-{
-	/*
-    *    Redirect to any URL passed as parameter
-    *
-    */
-	function redirect($url)
+    public static function redirectTo($url)
 	{
 		header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
 		header('Pragma: no-cache');
-		header('Location: ' . $url);
-		exit;
+        header('Location: ' . $url);
+        
+        return;
 	}
 }

@@ -5,6 +5,7 @@ use \Models\Home as Home;
 use Tracy\Debugger as Debugger;
 use Faker\Factory as Factory;
 use Symfony\Component\HttpFoundation\Request;
+use Handler\AppHelper;
 
 class HomeController extends Controller {
 
@@ -24,7 +25,6 @@ class HomeController extends Controller {
 
     public function index()
     {
-        // dump($this->homeModel->getAll());die;
         $this->view->render('helifox-landing-page', [
             'heading' => 'HeliFox',
             'text' => 'XMicro Framework',
@@ -35,7 +35,16 @@ class HomeController extends Controller {
     public function testingUrl()
     {
         dump($this->faker);
-        dump($this->request);
+        dump($this->request->server->get('HOSTNAME'));
+        dump(AppHelper::ipAddr());
+        dump(AppHelper::generateRandomAlphaNumericString(25));
+
+        $normalString = 'Vous êtes employé';
+        $normalizeString = AppHelper::stringNormalizer($normalString,'-');
+        dump($normalizeString);
+        dump(AUTHOR);
+
+        // AppHelper::redirectTo('https://medoo.in/api/new');
     }
 
     public function __404()

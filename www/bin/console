@@ -1,25 +1,24 @@
 #!/usr/bin/php
 <?php 
-    require __DIR__.'/../vendor/autoload.php';
-    require __DIR__.'/../library/Database.php';
+    require __DIR__ . '/../vendor/autoload.php';
+	require __DIR__ . '/../library/Database.php';
+	require __DIR__ . '/../configuration/commands.php';
 
 	Dotenv\Dotenv::createImmutable(dirname(__DIR__))->load();
 	$dataFixtures = new Handler\Fixtures\DataFixtures();
-	
-	$commands = [
-		'database:init'	=> 'init'
-	];
-
 	array_shift($argv);
 	
 	foreach ($argv as $key => $value) {
-
 		if (array_key_exists($value, $commands)) {
-			$methodName = $commands[$value];
-			$dataFixtures->{ $methodName }();
+			try {
+				$methodName = $commands[$value];
+				$dataFixtures->{ $methodName }();
+			} catch (Error $e) {
+				echo "\033[31mPlease define method `" . $methodName . "` in DataFixtures ! \033[0m" . "\n\r";
+			}
+			return;
 		} else {
-			echo 'Command ' . $value . ' was not found ! ' . "\n\r";
+			echo "\033[31mCommand `" . $value . "` was not found ! \033[0m" . "\n\r";
 		}
-
 	}
 ?>

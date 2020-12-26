@@ -7,10 +7,12 @@
         <title><?php echo $this->e($title) ?></title>
         <link rel="shortcut icon" type="image/x-icon" href="<?php echo URL?>favicon.ico"/>
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" href="<?php echo URL ?>assets/css/helifox-style.css">
+        <!-- <link rel="stylesheet" href="<?php echo URL ?>assets/css/helifox-style.css"> -->
+        <link href="<?php echo URL ?>min/?f=public/assets/css/helifox-style.css" type="text/css" rel="stylesheet" />
     </head>
     <body>
     <?php echo $this->section('landingPage') ?>
-    <script src="<?php echo URL ?>assets/js/scripts.js"></script>
+    <!-- <script src="<?php echo URL ?>assets/js/scripts.js"></script> -->
+    <link href="<?php echo URL ?>min/?f=public/assets/js/scripts.js" type="text/css" rel="stylesheet" />
     </body>
 </html>

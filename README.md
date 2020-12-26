@@ -6,12 +6,13 @@
 
 - Clone the repo
 - Build project : `docker-compose up -d --build`
+- Environmental vars : `.env`
 - Application URL : `http://localhost:8881/`
 - PhpMyAdmin : `http://localhost:8000/`
 
 ---
 
-## INSTALLATION
+## Installation
 
 - After docker build, connecto to container terminal : `docker exec -it fx_php_fpm ash`
 - Run `composer install`
@@ -20,7 +21,16 @@
 
 ---
 
-# Packages
+## Notes
+
+- Define **routes** in `<your_app>/configuration/routes.php`
+- Define **commands** in `<your_app>/configuration/commands.php`
+- Define **environment variables** in `<your_app>/.env` & `<your_app>/configuration/settings.php`
+- Run command in terminal : `php bin/console <your_defined_command>`
+- Static methods that might help in `<your_app>/services/AppHelper.php`
+---
+
+## Packages
 
 ### "require"
 
@@ -28,6 +38,9 @@
 - https://packagist.org/packages/symfony/http-foundation
 - https://packagist.org/packages/catfan/medoo
 - https://packagist.org/packages/ramsey/uuid
+- https://packagist.org/packages/vlucas/phpdotenv
+- https://packagist.org/packages/josantonius/session
+- https://packagist.org/packages/mrclay/minify
 
 ### "require-dev"
 

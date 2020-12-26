@@ -61,7 +61,6 @@ class Core{
         header('X-CDN: '.CDN);
         header('X-XSS-Protection: '.XSS);
         header('X-Content-Type-Options: '.XCTO);
-        header('CIP: '.IP());
         header('Pragma: no-cache');
         header('Expires: 0');
 
