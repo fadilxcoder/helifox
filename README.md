@@ -58,3 +58,12 @@
 - - `$this->generateRandomAlphaNumericString(75)`
 - - `$this->stringNormalizer('This is a text', '-')`
 - - `$this->redirectTo('any-other-url-goes-here')`
+
+### Codebase
+
+- Using `mrclay/minify`, do the following
+- - `mkdir public/min`
+- - `cp vendor/mrclay/minify/example.index.php public/min/index.php`
+- - `cp vendor/mrclay/minify/.htaccess public/min/`
+- - `cp vendor/mrclay/minify/config.php public/min/`
+- - `cp vendor/mrclay/minify/groupsConfig.php public/min/`
