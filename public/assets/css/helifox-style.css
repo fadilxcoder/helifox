@@ -31,12 +31,19 @@ h2{
     font-weight: 100;
     margin: 10px 0px;
     color: #DD4B21;
+    text-align: center;
 }
+h5{
+    text-align: center;
+}
+ol li,
 ul li{
     font-size: 16px;
     color: #252021;
     font-weight: bolder;
     line-height: 2;
+    text-align: center;
+    list-style: none;
 }
 p,a{
     font-size: 24px;

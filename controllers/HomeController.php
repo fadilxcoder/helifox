@@ -2,35 +2,39 @@
 
 use \Library\Controller as Controller;
 use \Models\Home as Home;
+use Tracy\Debugger as Debugger;
+use Faker\Factory as Factory;
+use Symfony\Component\HttpFoundation\Request;
+use Handler\AppHelper;
 
-class HomeController extends Controller{
+class HomeController extends Controller {
+
+    private $faker;
+    private $homeModel;
+    private $request;
 
     public function __construct()
     {
         parent::__construct();
         $this->model->call('Home');
-        $this->hm = new Home;
+        $this->homeModel = new Home;
+        Debugger::enable(Debugger::DEVELOPMENT);
+        $this->faker = Factory::create();
+        $this->request = Request::createFromGlobals();
     }
-
-    /*
-    *
-    *    E.g of method of Controller Home
-    *
-    *    function index()
-    *    {
-    *       $this->view->render('helifox-landing-page', [                           --- Rendering view by using templating engine
-    *           'msg'           => '#MVC Framework',                                --- Sending variable of type String : msg
-    *           'list_user'     => $this->hm->selectAll('tbl_name', 'OBJECT_CON')   --- Calling select method from model : list_user
-    *       ]);
-    *    }
-    *
-    */
 
     public function index()
     {
         $this->view->render('helifox-landing-page', [
-            'msg' => '#MVC Framework'
+            'heading' => 'HeliFox',
+            'text' => 'XMicro Framework',
+            'users' => $this->homeModel->getAll(),
         ]);
+    }
+
+    public function testingUrl()
+    {
+        $this->redirectTo('home');
     }
 
     public function __404()

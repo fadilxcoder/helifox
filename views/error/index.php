@@ -1,24 +1,10 @@
-<!--
-    +------------------------------------------+
-    ¦                 |\__/|                   ¦
-    ¦                / - - \                   ¦
-    ¦               /_.~ ~,_\                  ¦
-    ¦                  \@/                     ¦
-    ¦------------------------------------------¦
-    ¦           HELIFOX MVC FRAMEWORK          ¦
-    ¦            was developed by...           ¦
-    ¦               FADILXCODER                ¦
-    ¦------------------------------------------¦
-    ¦      www.facebook.com/fadil.xcoder       ¦
-    +------------------------------------------+
--->
 <!doctype html>
 <html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>HELIFOX 404</title>
+        <title>HELIFOX - 404</title>
         <link rel="shortcut icon" type="image/x-icon" href="<?php echo URL?>favicon.ico"/>
         <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
         <!-- Styles -->
@@ -61,9 +47,9 @@
         <div class="flex-center">
             <div class="content">
                 <div class="title">
+                    </p>&nbsp;</p>
                     <p>404</p>
-                    <p>PAGE NOT FOUND</p>
-                    <img src="<?php echo URL?>assets/images/helifox-logo.png" class="img-responsive" alt="logo">
+                    <p><small>Page not found</small></p>
                 </div>
             </div>
         </div>

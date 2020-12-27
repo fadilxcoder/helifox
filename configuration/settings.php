@@ -1,67 +1,18 @@
 <?php
 
-/*
- *  +------------------------------------------+
- *  ¦                 |\__/|                   ¦
- *  ¦                / - - \                   ¦
- *  ¦               /_.~ ~,_\                  ¦
- *  ¦                  \@/                     ¦
- *  ¦------------------------------------------¦
- *  ¦           HELIFOX PHP FRAMEWORK          ¦
- *  ¦------------------------------------------¦
- *  ¦      www.facebook.com/fadil.xcoder       ¦
- *  +------------------------------------------+
- *
- *  HELIFOX MVC FRAMEWORK
- *
- *  A Light & Cunning MVC Framework, built for PHP developers to create web apps.
- *
- * Copyright (c) Wednesday, 13 September 2017 ~ DAY OF THE PROGRAMMER ~ Fadil Rosun-Mungur ~ FADILXCODER
- *
-*/
+use Dotenv\Dotenv;
 
-/*
-*   Define the base url of the project
-*/
-define('URL', 'http://helifox.local/');
+Dotenv::createImmutable(__DIR__ . '/../')->load();
 
-/*
-*   Database configuration. Set ACTIVATE to TRUE if project will be using MySQL DATABASE and fill connection details.
-*/
-define('ACTIVATE',  'FALSE');
-define('HOST',      '');
-define('USERNAME',  '');
-define('PASSWORD',  '');
-define('DATABASE',  '');
+# Define the base url of the project
+define('URL', $_ENV['APP_URL']);
 
-/*
-* DEFINE ENVIRONMENT, Allowed environments variables : development / production
-*/
-define('ENVIRONMENT',  'development');
+# DEFINE ENVIRONMENT, Allowed environments variables : development / production
+define('ENVIRONMENT',  $_ENV['ENVIRONMENT']);
 
-/*
-* ARGON2I COST FACTORS CONFIGURATION
-*
-*************  Please note that ARGON2I needs python 3.4 installed *********************
-*
-* Default values of argon2i are below :
-*
-* MEMORY_COST           : PASSWORD_ARGON2_DEFAULT_MEMORY_COST
-* TIME_COST             : PASSWORD_ARGON2_DEFAULT_TIME_COST
-* PARALLELISM_FACTOR    : PASSWORD_ARGON2_DEFAULT_THREADS
-*
-* Personalized setting is below.
-*/
-define('MEMORY_COST', '2048');
-define('TIME_COST', '11');
-define('PARALLELISM_FACTOR', '7');
+# SET TIMEZONE DECLARATION
+date_default_timezone_set($_ENV['TZ']);
 
-/*
-* SET TIMEZONE DECLARATION
-*/
-date_default_timezone_set('Indian/Mauritius');
+# Customs
 
-
-/*
-*   Your other personal configurations go below..
-*/
+define('AUTHOR', $_ENV['AUTHOR']);
