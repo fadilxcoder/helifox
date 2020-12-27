@@ -34,17 +34,7 @@ class HomeController extends Controller {
 
     public function testingUrl()
     {
-        dump($this->faker);
-        dump($this->request->server->get('HOSTNAME'));
-        dump(AppHelper::ipAddr());
-        dump(AppHelper::generateRandomAlphaNumericString(25));
-
-        $normalString = 'Vous êtes employé';
-        $normalizeString = AppHelper::stringNormalizer($normalString,'-');
-        dump($normalizeString);
-        dump(AUTHOR);
-
-        // AppHelper::redirectTo('https://medoo.in/api/new');
+        $this->redirectTo('home');
     }
 
     public function __404()

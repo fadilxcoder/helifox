@@ -13,6 +13,6 @@
     <body>
     <?php echo $this->section('landingPage') ?>
     <!-- <script src="<?php echo URL ?>assets/js/scripts.js"></script> -->
-    <link href="<?php echo URL ?>min/?f=public/assets/js/scripts.js" type="text/css" rel="stylesheet" />
+    <script src="<?php echo URL ?>min/?f=public/assets/js/scripts.js"/></script>
     </body>
 </html>

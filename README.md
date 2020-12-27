@@ -28,6 +28,7 @@
 - Define **environment variables** in `<your_app>/.env` & `<your_app>/configuration/settings.php`
 - Run command in terminal : `php bin/console <your_defined_command>`
 - Static methods that might help in `<your_app>/services/AppHelper.php`
+
 ---
 
 ## Packages
@@ -46,3 +47,14 @@
 
 - https://packagist.org/packages/fzaninotto/faker
 - https://packagist.org/packages/tracy/tracy
+
+
+---
+
+## Docs
+
+- Methods available in **Controller** :
+- - `$this->getIps()`
+- - `$this->generateRandomAlphaNumericString(75)`
+- - `$this->stringNormalizer('This is a text', '-')`
+- - `$this->redirectTo('any-other-url-goes-here')`

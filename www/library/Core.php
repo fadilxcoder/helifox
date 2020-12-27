@@ -16,14 +16,14 @@ class Core{
         require __DIR__ . '/../configuration/routes.php';
         $this->cookies();
         $url = (isset($_GET['url']) != '') ? $_GET['url'] : $route['default'];
-        $url = rtrim($url, '@');
+        $url = rtrim($url, '/');
 
-        foreach($route as $key=>$value):
-            if($url == $key):
+        foreach ($route as $key => $value) :
+            if ($url == $key) :
                 $url = $value;
             endif;
         endforeach;
-
+        
         $url = explode('@',$url);
         $file =  __DIR__ . '/../controllers/' . $url[0] . '.php';
 
