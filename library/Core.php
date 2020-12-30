@@ -4,7 +4,8 @@ namespace Library;
 
 use \Library\Error as Error;
 
-class Core{
+class Core
+{
 
     public function __construct()
     {

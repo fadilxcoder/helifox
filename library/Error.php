@@ -4,7 +4,8 @@ namespace Library;
 
 use \Library\View as View;
 
-class Error{
+class Error
+{
 
     public function __construct()
     {

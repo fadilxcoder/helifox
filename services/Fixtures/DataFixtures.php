@@ -5,7 +5,8 @@ namespace Handler\Fixtures;
 use \Library\Database as DbManager;
 use Handler\Manager\UserManager;
 use Ramsey\Uuid\Uuid;
-use Faker\Factory as Factory;
+// use Faker\Factory as Factory;
+use Handler\DependencyInjection;
 
 class DataFixtures
 {
@@ -13,7 +14,8 @@ class DataFixtures
 
     public function __construct()
     {
-        $this->faker = Factory::create();
+        $depInj = DependencyInjection::init();
+        $this->faker = $depInj['DI_factory'];
     }
 
     public function init()

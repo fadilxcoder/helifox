@@ -1,26 +1,19 @@
 <?php
 
 use \Library\Controller as Controller;
-use \Models\Home as Home;
-use Tracy\Debugger as Debugger;
-use Faker\Factory as Factory;
-use Symfony\Component\HttpFoundation\Request;
-use Handler\AppHelper;
+use Handler\DependencyInjection;
 
-class HomeController extends Controller {
-
-    private $faker;
-    private $homeModel;
-    private $request;
+class HomeController extends Controller 
+{
+    private $depInj;
 
     public function __construct()
     {
         parent::__construct();
-        $this->model->call('Home');
-        $this->homeModel = new Home;
-        Debugger::enable(Debugger::DEVELOPMENT);
-        $this->faker = Factory::create();
-        $this->request = Request::createFromGlobals();
+        $this->depInj = $this->container();
+        // $this->depInj = DependencyInjection::init();
+        $this->depInj['DI_debugger'];
+        $this->depInj['DI_factory'];
     }
 
     public function index()
@@ -28,7 +21,7 @@ class HomeController extends Controller {
         $this->view->render('helifox-landing-page', [
             'heading' => 'HeliFox',
             'text' => 'XMicro Framework',
-            'users' => $this->homeModel->getAll(),
+            'users' =>$this->depInj['DI_homeModel']->getAll(),
         ]);
     }
 
