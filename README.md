@@ -59,3 +59,4 @@
 - - `$this->generateRandomAlphaNumericString(75)`
 - - `$this->stringNormalizer('This is a text', '-')`
 - - `$this->redirectTo('any-other-url-goes-here')`
+- - `$this->container()`
