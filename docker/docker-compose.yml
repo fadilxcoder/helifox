@@ -3,7 +3,7 @@ version: '3'
 services:
 
   database:
-    container_name: fx_database
+    container_name: hfx_database
     build:
       context: ./database
     environment:
@@ -18,7 +18,7 @@ services:
       - ./database/data:/var/lib/mysql
 
   php-fpm:
-    container_name: fx_php_fpm
+    container_name: hfx_php_fpm
     build:
       context: ./php-fpm
     depends_on:
@@ -27,7 +27,7 @@ services:
       - ../www:/var/www/html
 
   apache2:
-    container_name: fx_apache_2
+    container_name: hfx_apache_2
     build:
       context: ./apache
     volumes:
@@ -39,7 +39,7 @@ services:
       - php-fpm
 
   phpmyadmin:
-    container_name: fx_pma
+    container_name: hfx_pma
     image: phpmyadmin/phpmyadmin:latest
     ports:
       - 8000:80

@@ -3,15 +3,17 @@
 namespace Library;
 
 use \Library\View as View;
-use \Library\Model as Model;
 use Handler\AppHelper;
+use Handler\DependencyInjection;
 
-class Controller{
+class Controller
+{
+    protected $view;
+    protected $model;
 
     public function __construct()
     {
-        $this->view = new View;
-        $this->model = new Model;
+        $this->view = new View();
     }
 
     public function getIps()
@@ -32,5 +34,10 @@ class Controller{
     public function redirectTo(String $url)
     {
         return AppHelper::redirectTo($url);
+    }
+
+    public function container()
+    {
+        return DependencyInjection::init();
     }
 }

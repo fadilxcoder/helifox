@@ -35,18 +35,19 @@
 
 ### "require"
 
-- https://packagist.org/packages/league/plates
-- https://packagist.org/packages/symfony/http-foundation
-- https://packagist.org/packages/catfan/medoo
-- https://packagist.org/packages/ramsey/uuid
-- https://packagist.org/packages/vlucas/phpdotenv
-- https://packagist.org/packages/josantonius/session
-- https://packagist.org/packages/mrclay/minify
+- https://packagist.org/packages/league/plates (Templating engine)
+- https://packagist.org/packages/symfony/http-foundation (Request handler)
+- https://packagist.org/packages/catfan/medoo (DB handler)
+- https://packagist.org/packages/ramsey/uuid (Unique identifier generator)
+- https://packagist.org/packages/vlucas/phpdotenv (.env)
+- https://packagist.org/packages/josantonius/session (Session manipulation)
+- https://packagist.org/packages/mrclay/minify (CSS/JS minifier)
+- https://packagist.org/packages/pimple/pimple (Dependency injection)
 
 ### "require-dev"
 
-- https://packagist.org/packages/fzaninotto/faker
-- https://packagist.org/packages/tracy/tracy
+- https://packagist.org/packages/fzaninotto/faker (Fake data generator)
+- https://packagist.org/packages/tracy/tracy (Debugger)
 
 
 ---
