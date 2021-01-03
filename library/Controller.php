@@ -3,15 +3,17 @@
 namespace Library;
 
 use \Library\View as View;
-use \Library\Model as Model;
 use Handler\AppHelper;
 use Handler\DependencyInjection;
 
 class Controller
 {
+    protected $view;
+    protected $model;
+
     public function __construct()
     {
-        $this->view = new View;
+        $this->view = new View();
     }
 
     public function getIps()

@@ -5,7 +5,6 @@ namespace Handler\Fixtures;
 use \Library\Database as DbManager;
 use Handler\Manager\UserManager;
 use Ramsey\Uuid\Uuid;
-// use Faker\Factory as Factory;
 use Handler\DependencyInjection;
 
 class DataFixtures
@@ -14,14 +13,12 @@ class DataFixtures
 
     public function __construct()
     {
-        $depInj = DependencyInjection::init();
-        $this->faker = $depInj['DI_factory'];
+        $container = DependencyInjection::init();
+        $this->faker = $container['DI_factory'];
     }
 
     public function init()
     {
-        $userMgmt = new UserManager();
-
         DbManager::getInstance()->drop("users");
 
         // CREATE users
@@ -71,7 +68,7 @@ class DataFixtures
         $arr = [];
         $userMgmt = new UserManager();
 
-        for ($i=0; $i<10; $i++) :
+        for ($i=0; $i<25; $i++) :
             $arr[] = [
                 "id_user" => $i + 1,
                 "uuid" => Uuid::uuid4()->toString(),
