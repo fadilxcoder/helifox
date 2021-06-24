@@ -43,6 +43,7 @@
 - https://packagist.org/packages/josantonius/session
 - https://packagist.org/packages/mrclay/minify
 - https://packagist.org/packages/pimple/pimple
+- https://packagist.org/packages/filp/whoops
 
 ### "require-dev"
 

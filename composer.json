@@ -15,7 +15,8 @@
         "vlucas/phpdotenv": "^5.2",
         "ramsey/uuid": "^4.1",
         "josantonius/session": "^1.1",
-        "mrclay/minify": "^3.0"
+        "mrclay/minify": "^3.0",
+        "filp/whoops": "^2.13"
     },
     "require-dev": {
         "tracy/tracy": "^2.7",

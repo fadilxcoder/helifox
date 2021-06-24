@@ -8,6 +8,11 @@ else :
 	exit(1); // EXIT_ERROR
 endif;
 
+# Debugging tools
+$whoops = new \Whoops\Run;
+$whoops->pushHandler(new \Whoops\Handler\PrettyPageHandler);
+$whoops->register();
+
 require __DIR__.'/../library/Error.php';
 require __DIR__.'/../library/Core.php';
 require __DIR__.'/../library/Controller.php';
