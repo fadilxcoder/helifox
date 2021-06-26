@@ -4,14 +4,16 @@ namespace App\Controller;
 
 use App\Core\Controller;
 use App\Repository\UsersRepository;
+use App\Command\CreateUserCommand;
 
 class ContentController extends Controller
 {
-    private $usersRepository;
+    private $usersRepository, $createUserCommand;
 
-    public function __construct(UsersRepository $usersRepository)
+    public function __construct(UsersRepository $usersRepository, CreateUserCommand $createUserCommand)
     {
         $this->usersRepository = $usersRepository;
+        $this->createUserCommand = $createUserCommand;
     }
 
     public function show($id)
@@ -21,6 +23,7 @@ class ContentController extends Controller
 
         $user = $this->usersRepository->getUser(1);
         $this->usersRepository->updateUser($user);
+        $this->createUserCommand->execute();
 
         echo "Content show ID - " . $id;
     }

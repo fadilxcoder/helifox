@@ -56,4 +56,34 @@ class UsersRepository extends Repository
             'last_login' => (new \DateTime())->format('Y-m-d H:i:s'),
         ]);
     }
+
+    public function insertUser()
+    {
+        $query = '
+            INSERT INTO 
+                `hfx_users` (
+                    uuid,
+                    username,
+                    name,
+                    password,
+                    last_login
+                )
+            VALUES 
+                (
+                    :uuid,
+                    :username,
+                    :name,
+                    :password,
+                    :last_login
+                )
+        ';
+
+        $this->db->update($query, [
+            'uuid' => rand(999999, 999999999),
+            'username' => 'FX-' . rand(0, 9),
+            'name' => 'HFX4',
+            'password' => md5('tester'),
+            'last_login' => (new \DateTime())->format('Y-m-d H:i:s')
+        ]);
+    }
 }
