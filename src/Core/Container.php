@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Twig\Loader\FilesystemLoader;
 use \DI\ContainerBuilder as ContainerBuilder;
 use App\Core\Database as Database;
-
+use App\Core\Twig as TwigEnv;
 class Container
 {
     public static function init()
@@ -32,6 +32,7 @@ class Container
         $loader = new FilesystemLoader(__DIR__ . '/../../templates');
         $container->set(Environment::class, new Environment($loader));
         $container->set(Request::class, Request::createFromGlobals());
+        $container->set(TwigEnv::class, new TwigEnv());
 
         return $container;
     }

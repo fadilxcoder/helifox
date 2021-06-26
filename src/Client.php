@@ -4,25 +4,18 @@ namespace App;
 
 use App\ClientResolverInterface;
 use DI\Container;
-use Symfony\Component\HttpFoundation\Request;
 use App\Config\Router;
 
 class Client implements ClientResolverInterface
 {
-    /**
-     * @var Request
-     */
-    private $request;
-
     /**
      * @var Container
      */
     private $container;
 
 
-    public function __construct(Request $request, Container $container)
+    public function __construct(Container $container)
     {
-        $this->request = $request;
         $this->container = $container;
     }
 
@@ -33,17 +26,21 @@ class Client implements ClientResolverInterface
         switch ($route[0]) 
         {
             case \FastRoute\Dispatcher::NOT_FOUND:
-                dump('404 Not found');
+                $this->container->call('App\\Controller\\Error\\BadRequest::NOT_FOUND');
                 break;
 
             case \FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
-                dump('405 Method Not Allowed');
+                $this->container->call('App\\Controller\\Error\\BadRequest::METHOD_NOT_ALLOWED');
                 break;
 
             case \FastRoute\Dispatcher::FOUND:
                 $controller = $route[1];
                 $parameters = $route[2];
                 $this->container->call($controller, $parameters);
+                break;
+            
+            default:
+                $this->container->call('App\\Controller\\Error\\BadRequest::UNKNOWN');
                 break;
         }
     }

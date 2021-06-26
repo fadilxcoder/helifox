@@ -2,15 +2,22 @@
 
 namespace App\Controller\Error;
 
-class BadRequest
+use App\Core\Controller;
+
+class BadRequest extends Controller
 {
-    public function notFound()
+    public static function NOT_FOUND()
     {
-        echo 'page not found !';
+        http_response_code(404);
     }
 
-    public function methodNotAllowed()
+    public static function METHOD_NOT_ALLOWED()
     {
-        echo 'methid not allowwd'
+        return http_response_code(405);
+    }
+
+    public static function UNKNOWN()
+    {
+        return http_response_code(500);
     }
 }

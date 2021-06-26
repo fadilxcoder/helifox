@@ -11,7 +11,6 @@ endif;
 use App\Client;
 use App\Core\Container;
 use Dotenv\Dotenv;
-use Symfony\Component\HttpFoundation\Request;
 use Tracy\Debugger as Debugger;
 use \Whoops\Run as Run;
 use \Whoops\Handler\PrettyPageHandler as PrettyPageHandler;
@@ -23,7 +22,6 @@ $whoops->pushHandler(new PrettyPageHandler());
 $whoops->register();
 
 # Initialization
-$request = Request::createFromGlobals();
 Debugger::enable(Debugger::DEVELOPMENT);
 Dotenv::createImmutable(__DIR__ . '/../')->load();
 $container = Container::init();
@@ -31,7 +29,7 @@ date_default_timezone_set($_ENV['TZ']);
 
 try 
 {
-    $app = new Client($request, $container);
+    $app = new Client($container);
     $app->execute();
 } 
 catch (NotFoundHttpException $e) 

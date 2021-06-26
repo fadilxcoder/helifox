@@ -2,15 +2,15 @@
 
 namespace App\Controller;
 
-class HomeController
-{
-    public function __invoke()
-    {
-        echo 'invoke';
-    }
+use App\Core\Controller;
 
-    public function index($id)
+class HomeController extends Controller
+{
+    public function index()
     {
-        echo "index - " . $id;
+        return $this->render('home/index.html.twig', [
+            'a' => 132465,
+            'xxx' => false,
+        ]);
     }
 }

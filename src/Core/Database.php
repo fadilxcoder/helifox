@@ -15,17 +15,45 @@ class Database
         }
     }
 
+    /**
+     * FindAll - FETCH_OBJ / FETCH_ASSOC / FETCH_NUM 
+     *
+     * @param string $query
+     * @param array $params
+     * @return void
+     */
+    public function findAll(string $query, array $params = [])
+    {
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute($params);
 
-    // public function find(string $query, array $params = [])
-    // {
-    //     $stmt = $this->pdo->prepare($query);
-    //     $stmt->execute($params);
+        return $stmt->fetchAll(\PDO::FETCH_OBJ);;
+    }
 
-    //     return $stmt->fetch( \PDO::FETCH_ASSOC);
-    // }
+    /**
+     * FindOne - FETCH_OBJ / FETCH_ASSOC / FETCH_NUM 
+     *
+     * @param string $query
+     * @param array $params
+     * @return void
+     */
+    public function findOne(string $query, array $params = [])
+    {
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute($params);
 
-    // public function update(string $query, array $params = [])
-    // {
-    //     $this->pdo->prepare($query)->execute($params);
-    // }
+        return $stmt->fetch(\PDO::FETCH_OBJ);
+    }
+
+    /**
+     * Insert / Update / Delete
+     *
+     * @param string $query
+     * @param array $params
+     * @return void
+     */
+    public function update(string $query, array $params = [])
+    {
+        $this->pdo->prepare($query)->execute($params);
+    }
 }
