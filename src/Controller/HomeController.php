@@ -9,8 +9,8 @@ class HomeController extends Controller
     public function index()
     {
         return $this->render('home/index.html.twig', [
-            'a' => 132465,
-            'xxx' => false,
+            'txt_1' => 132465,
+            'txt_2' => 'DEV',
         ]);
     }
 }

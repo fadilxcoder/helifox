@@ -57,7 +57,7 @@ class UsersRepository extends Repository
         ]);
     }
 
-    public function insertUser()
+    public function insertUser(array $user)
     {
         $query = '
             INSERT INTO 
@@ -79,11 +79,11 @@ class UsersRepository extends Repository
         ';
 
         $this->db->update($query, [
-            'uuid' => rand(999999, 999999999),
-            'username' => 'FX-' . rand(0, 9),
-            'name' => 'HFX4',
-            'password' => md5('tester'),
-            'last_login' => (new \DateTime())->format('Y-m-d H:i:s')
+            'uuid' => $user['uuid'],
+            'username' => $user['username'],
+            'name' => $user['name'],
+            'password' => $user['password'],
+            'last_login' => $user['last_login'],
         ]);
     }
 }

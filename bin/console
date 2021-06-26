@@ -5,16 +5,4 @@ if (!in_array(PHP_SAPI, ['cli', 'phpdbg', 'embed'], true)) {
     echo 'Warning: The console should be invoked via the CLI version of PHP, not the '.PHP_SAPI.' SAPI'.PHP_EOL;
 }
 
-require __DIR__ . '/../vendor/autoload.php';
-
-use Symfony\Component\Console\Application;
-use Dotenv\Dotenv;
-use App\Core\Container;
-use App\Command\CreateUserCommand;
-
-Dotenv::createImmutable(__DIR__ . '/../')->load();
-$container = Container::init();
-$application = new Application();
-$application->add(new CreateUserCommand());
-
-$application->run();
+require __DIR__ . '/../config/commands.php';

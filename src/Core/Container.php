@@ -3,11 +3,10 @@
 namespace App\Core;
 
 use Twig\Environment;
-use Symfony\Component\HttpFoundation\Request;
 use Twig\Loader\FilesystemLoader;
 use \DI\ContainerBuilder as ContainerBuilder;
 use App\Core\Database as Database;
-use App\Core\Twig as TwigEnv;
+use Symfony\Component\HttpFoundation\Request;
 class Container
 {
     public static function init()
@@ -24,15 +23,14 @@ class Container
                     \DI\get('database.host'),
                     \DI\get('database.user'),
                     \DI\get('database.password')
-                )
+                ),
+                Environment::class => \DI\autowire()->constructor(
+                    new FilesystemLoader(__DIR__ . '/../../templates')
+                ),
             ]
         );
         $container = $containerBuilder->build();
-
-        $loader = new FilesystemLoader(__DIR__ . '/../../templates');
-        $container->set(Environment::class, new Environment($loader));
         $container->set(Request::class, Request::createFromGlobals());
-        $container->set(TwigEnv::class, new TwigEnv());
 
         return $container;
     }

@@ -4,27 +4,25 @@ namespace App\Controller;
 
 use App\Core\Controller;
 use App\Repository\UsersRepository;
-use App\Command\CreateUserCommand;
+use Symfony\Component\HttpFoundation\Request;
 
 class ContentController extends Controller
 {
-    private $usersRepository, $createUserCommand;
+    private $usersRepository;
 
-    public function __construct(UsersRepository $usersRepository, CreateUserCommand $createUserCommand)
+    public function __construct(UsersRepository $usersRepository)
     {
         $this->usersRepository = $usersRepository;
-        $this->createUserCommand = $createUserCommand;
     }
 
-    public function show($id)
+
+    public function show($id, Request $request, $slug)
     {
-        dump($this->usersRepository->getUsers());
-        dump($this->usersRepository->getUser(7));
+        # $this->usersRepository->getUsers();
 
-        $user = $this->usersRepository->getUser(1);
-        $this->usersRepository->updateUser($user);
-        $this->createUserCommand->execute();
+        # $user = $this->usersRepository->getUser(1);
+        # $this->usersRepository->updateUser($user);
 
-        echo "Content show ID - " . $id;
+        dump($this->usersRepository->getUser(rand(1, 25)), $id, $slug, $request->query->get('action'));
     }
 }
