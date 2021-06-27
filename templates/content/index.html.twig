@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Content{% endblock %}
+
+{% block body %}
+    <pre>
+        {{ dump(user)}}
+    </pre>
+     {% for _user in users %}
+        <li>{{ _user.username|e }}</li>
+    {% endfor %}
+{% endblock %}

@@ -12,11 +12,14 @@
 - Register variables / classes concerning DI in `src/Core/Container.php` - (Documentation : https://php-di.org/doc/)
 - `Client.php` / `ClientResolverInterface` - Application entry point from `public/index.php`
 - Define your **routes** in `src/Config/Router.php`
-- `templates` hold twigs layouts
+- `templates` hold twigs layouts - (Documentation : https://twig.symfony.com/doc/3.x/api.html)
 - Define services needed in `src/Services/..`
-- SQL with PDO goes in `src/Repository/..`
-- Controller for twig rendering - `src/Controller/..`
+- SQL with PDO goes in `src/Repository/..`  & **NEVER use `__constructor` due to extend class**
+- Controller for twig rendering - `src/Controller/..` & **NEVER use `__constructor` due to extend class**
 - Error handlers - `src/Controller/Errors/`
+- `.env` - configuration / environmental variables
+- Uses node - webpack - compilation of assets
+- `public/dist` for compiled assets
 
 ### Routing notes
 
@@ -70,17 +73,17 @@
 
 ## Packages (require / require-dev)
 
-- https://packagist.org/packages/nikic/fast-route
+- https://packagist.org/packages/nikic/fast-route - `Routes`
 - https://packagist.org/packages/symfony/http-kernel
-- https://packagist.org/packages/symfony/http-foundation
-- https://packagist.org/packages/vlucas/phpdotenv
-- https://packagist.org/packages/twig/twig
-- https://packagist.org/packages/php-di/php-di
+- https://packagist.org/packages/symfony/http-foundation - `Request [GET, POST]`
+- https://packagist.org/packages/vlucas/phpdotenv - `.env`
+- https://packagist.org/packages/twig/twig - `Twig templating` (https://twig.symfony.com/doc/3.x/)
+- https://packagist.org/packages/php-di/php-di - `Dependency Injection`
 - https://packagist.org/packages/symfony/asset
-- https://packagist.org/packages/tracy/tracy
-- https://packagist.org/packages/filp/whoops
-- https://packagist.org/packages/fzaninotto/faker
-- https://packagist.org/packages/mnapoli/silly
+- https://packagist.org/packages/tracy/tracy - `Debugger`
+- https://packagist.org/packages/filp/whoops - `Debugger`
+- https://packagist.org/packages/fzaninotto/faker - `Dummy data provider`
+- https://packagist.org/packages/mnapoli/silly - `CLI`
 
 
 ## Environment configuration
@@ -97,9 +100,15 @@
 ## Usage
 
 - Set up `vhosts`
-- `Composer Install`
+- Configure `.env`
+- `composer install`
 - Populate DB - *users* : `php bin/console add:user`
-- Tested demo URL :
+- `npm install`
+- Compiling assets 
+- - `npm run js-build` : compile JS
+- - `npm run css-build` : compile CSS
+- - `npm run js-build-watch` : compile JS in *watch mode*
+- **Tested demo URL** :
 - - http://helifox.local/
 - - http://helifox.local/content/5/fx/?action=cancel
 - - http://helifox.local/content/5/fx/player?action=cancel

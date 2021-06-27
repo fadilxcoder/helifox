@@ -15,10 +15,14 @@
     <meta name="author" content="fadilxcoder" />
     <meta name="copyright" content="fadilxcoder" />
     <meta name="robots" content="index,follow"/>
-    {% block stylesheet %}{% endblock %}
+    {% block stylesheet %}
+        <link rel="stylesheet" href="{{ app.uri }}dist/style.css">
+    {% endblock %}
 </head>
 <body>
     {% block body %}{% endblock %}
-    {% block javascript %}{% endblock %}
+    {% block javascript %}
+        <script src="{{ app.uri }}dist/script.js"></script>
+    {% endblock %}
 </body>
 </html>

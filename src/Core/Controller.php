@@ -24,6 +24,7 @@ class Controller
             'name' => $this->twigEnv->appName(),
         ];
 
+        $this->twig->addExtension(new \Twig\Extension\DebugExtension());
         echo $this->twig->render($view, $parameters);
     }
 

@@ -8,21 +8,16 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ContentController extends Controller
 {
-    private $usersRepository;
-
-    public function __construct(UsersRepository $usersRepository)
+    public function show($id, Request $request, $slug, UsersRepository $usersRepository)
     {
-        $this->usersRepository = $usersRepository;
-    }
-
-
-    public function show($id, Request $request, $slug)
-    {
-        # $this->usersRepository->getUsers();
-
-        # $user = $this->usersRepository->getUser(1);
-        # $this->usersRepository->updateUser($user);
-
-        dump($this->usersRepository->getUser(rand(1, 25)), $id, $slug, $request->query->get('action'));
+        # $usersRepository->getUsers();
+        # $user = $usersRepository->getUser(1);
+        # $usersRepository->updateUser($user);
+        # dump($usersRepository->getUser(rand(1, 25)), $id, $slug, $request->query->get('action'));
+        
+        return $this->render('content/index.html.twig', [
+            'user' => $usersRepository->getUser(rand(1, 25)),
+            'users' => $usersRepository->getUsers()
+        ]);
     }
 }

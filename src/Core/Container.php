@@ -12,6 +12,8 @@ class Container
     public static function init()
     {
         $containerBuilder = new ContainerBuilder();
+        $twig_repo = __DIR__ . '/../../' . $_ENV['TWIG_REPO'];
+        
         $containerBuilder->addDefinitions(
             [
                 'database.name' => $_ENV['DB_NAME'],
@@ -25,7 +27,10 @@ class Container
                     \DI\get('database.password')
                 ),
                 Environment::class => \DI\autowire()->constructor(
-                    new FilesystemLoader(__DIR__ . '/../../templates')
+                    new FilesystemLoader($twig_repo),
+                    [
+                        'debug' => true
+                    ]
                 ),
             ]
         );
