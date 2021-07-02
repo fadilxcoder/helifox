@@ -29,8 +29,8 @@
 - Action type : `GET / POST`
 - Url : `/content/{id:\d+}/{slug:[a-z]+}[/{extra}]`
 - - `{id}` : The *id* must be a number **(\d+)**
-- - `[/{slug}]` : The *slug* must be an alphabet **([a-z]+)**
-- - `[/{extra}]` : The *extra* suffix is optional
+- - `{slug}` : The *slug* must be an alphabet **([a-z]+)**
+- - `[/{extra}]` : The *extra* suffix is optional - square bracket
 - [ContentController::class, 'show']
 - - `ContentController::class` : Controller called 
 - - `show` : Method called
@@ -71,6 +71,21 @@
 > `// Matches /user/foo/bar as well`
 > `$r->addRoute('GET', '/user/{name:.+}', 'handler');`
 
+### Routing Regex
+
+- The rules : `'/content/{id:\d+}/{slug:[a-z]+}[/{extra}]'`
+- Take the part : `{slug:[a-z]+}`
+- Part for regex manipulation : `[a-z]` **Allow only 'a' to 'z'**
+- Modify it : `[a-zA-Z0-9-_&]` 
+- - **Allow only** : 
+- - `a` to `z`
+- - `A` to `Z`
+- - `0` to `9`
+- - `-` *dash*
+- - `_` *underscore*
+- - `&` *ampersand*
+- Finally : `{slug:[a-zA-Z0-9-_&]+}`
+
 ## Packages (require / require-dev)
 
 - https://packagist.org/packages/nikic/fast-route - `Routes`
@@ -102,8 +117,10 @@
 - Set up `vhosts`
 - Configure `.env`
 - `composer install`
-- Populate DB - *users* : `php bin/console add:user`
-- `npm install`
+- DB tables :
+- - `php bin/console database:users up && php bin/console database:users seed` - Create the table `hfx_users` and populate it
+- - `php bin/console database:users down` - Drop the table `hfx_users`
+- Assets `npm install`
 - Compiling assets 
 - - `npm run js-build` : compile JS
 - - `npm run css-build` : compile CSS
@@ -112,3 +129,4 @@
 - - http://helifox.local/
 - - http://helifox.local/content/5/fx/?action=cancel
 - - http://helifox.local/content/5/fx/player?action=cancel
+- - http://helifox.local/content/5/this-is-a-demo-url-a555&XX7

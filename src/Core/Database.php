@@ -56,4 +56,15 @@ class Database
     {
         $this->pdo->prepare($query)->execute($params);
     }
+
+    /**
+     * Run SQL query directly
+     *
+     * @param string $query
+     * @return void
+     */
+    public function exec(string $query)
+    {
+        $this->pdo->exec($query);
+    }
 }

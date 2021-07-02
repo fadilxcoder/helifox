@@ -11,7 +11,7 @@ class Router
     {
         return \FastRoute\simpleDispatcher(function (RouteCollector $routes) {
             $routes->addRoute('GET', '/', [HomeController::class, 'index']);
-            $routes->addRoute('GET', '/content/{id:\d+}/{slug:[a-z]+}[/{extra}]', [ContentController::class, 'show']);
+            $routes->addRoute('GET', '/content/{id:\d+}/{slug:[a-zA-Z0-9-_&]+}[/{extra}]', [ContentController::class, 'show']);
         });
     }
 }

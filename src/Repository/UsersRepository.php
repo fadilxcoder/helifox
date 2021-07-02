@@ -86,4 +86,31 @@ class UsersRepository extends Repository
             'last_login' => $user['last_login'],
         ]);
     }
+
+    public function createTable()
+    {
+        $query = '
+            DROP TABLE IF EXISTS `hfx_users`;
+            CREATE TABLE `hfx_users` (
+            `id_user` int(11) NOT NULL AUTO_INCREMENT,
+            `uuid` varchar(255) NOT NULL,
+            `username` varchar(45) DEFAULT NULL,
+            `name` varchar(255) DEFAULT NULL,
+            `password` varchar(255) DEFAULT NULL,
+            `last_login` datetime DEFAULT NULL,
+            PRIMARY KEY (`id_user`)
+            ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+        ';
+
+        $this->db->exec($query);
+    }
+
+    public function dropTable()
+    {
+        $query = '
+            DROP TABLE IF EXISTS `hfx_users`;
+        ';
+
+        $this->db->exec($query);
+    }
 }
