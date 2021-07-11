@@ -121,6 +121,7 @@
 - - `php bin/console database:users up && php bin/console database:users seed` - Create the table `hfx_users` and populate it
 - - `php bin/console database:users down` - Drop the table `hfx_users`
 - Assets `npm install`
+- `npm rebuild node-sass` - Changing environment
 - Compiling assets 
 - - `npm run js-build` : compile JS
 - - `npm run css-build` : compile CSS
