@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hola{% endblock %}
+
+{% block body %}
+    <ul>
+        <li>{{ txt_1 }}</li>
+        <li>{{ txt_2 }}</li>
+    </ul>
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script>console.log('Hola')</script>
+{% endblock %}

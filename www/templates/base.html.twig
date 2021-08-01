@@ -1,0 +1,28 @@
+<!--
+    +------------------------------------------+
+    ¦              FADILXCODER                 ¦
+    +------------------------------------------+
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>{% block title %}{% endblock %} | {{ app.name }}</title>
+    <meta name="Description" content=""/>
+    <meta name="Keywords" content=""/>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="fadilxcoder" />
+    <meta name="copyright" content="fadilxcoder" />
+    <meta name="robots" content="index,follow"/>
+    {% block stylesheet %}
+        <link rel="stylesheet" href="{{ app.uri }}dist/style.css">
+    {% endblock %}
+</head>
+<body>
+    {% block body %}{% endblock %}
+    {% block javascript %}
+        <script src="{{ app.uri }}dist/script.js"></script>
+    {% endblock %}
+</body>
+</html>

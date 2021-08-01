@@ -1,41 +1,42 @@
 <?php
 
-if (file_exists(__DIR__.'/../vendor/autoload.php')) :
-	require __DIR__.'/../vendor/autoload.php';
+if (file_exists(__DIR__ . '/../vendor/autoload.php')) :
+	require __DIR__ . '/../vendor/autoload.php';
 else :
 	header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
 	echo 'Did you install the dependencies ? ☺';
-	exit(1); // EXIT_ERROR
+	exit(1);
 endif;
 
-require __DIR__.'/../library/Error.php';
-require __DIR__.'/../library/Core.php';
-require __DIR__.'/../library/Controller.php';
-require __DIR__.'/../library/Model.php';
-require __DIR__.'/../library/View.php';
-require __DIR__.'/../library/Database.php';
-require __DIR__.'/../configuration/settings.php';
+use App\Client;
+use App\Core\Container;
+use Dotenv\Dotenv;
+use Tracy\Debugger as Debugger;
+use \Whoops\Run as Run;
+use \Whoops\Handler\PrettyPageHandler as PrettyPageHandler;
+use \Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
-use \Library\Core as Core;
+# Debugging tools
+$whoops = new Run();
+$whoops->pushHandler(new PrettyPageHandler());
+$whoops->register();
 
-switch (ENVIRONMENT)
+# Initialization
+Debugger::enable(Debugger::DEVELOPMENT);
+Dotenv::createImmutable(__DIR__ . '/../')->load();
+$container = Container::init();
+date_default_timezone_set($_ENV['TZ']);
+
+try 
 {
-	case 'development':
-		ini_set('display_errors', 1);
-        ini_set('display_startup_errors', 1);
-        error_reporting(E_ALL);
-	break;
-
-	case 'production':
-        ini_set('display_errors', 0);
-        ini_set('display_startup_errors', 0);
-        error_reporting(0);
-	break;
-
-	default:
-		header('HTTP/1.1 503 Service Unavailable.', TRUE, 503);
-		echo 'The application environment is not set correctly.';
-		exit(1); // EXIT_ERROR
+    $app = new Client($container);
+    $app->execute();
+} 
+catch (NotFoundHttpException $e) 
+{
+    http_response_code($e->getStatusCode());
+} 
+catch (Exception $e) 
+{
+    dump($e);
 }
-
-$core = new Core;
