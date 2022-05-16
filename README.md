@@ -71,6 +71,10 @@
 > `// Matches /user/foo/bar as well`
 > `$r->addRoute('GET', '/user/{name:.+}', 'handler');`
 
+<br>
+
+`'/[{extra}]'` : Allowing `<URL>/?fb_click=FB_ID&utm=UTM_ID&gtm=GTM_ID` & `<URL>/`
+
 ### Routing Regex
 
 - The rules : `'/content/{id:\d+}/{slug:[a-z]+}[/{extra}]'`
@@ -117,6 +121,7 @@
 - Set up `vhosts`
 - Configure `.env`
 - `composer install`
+- `composer update` when modifying specific **packages** - *PS. `packages/chrome/`, `"version": "master"` in `composer.json`*
 - DB tables :
 - - `php bin/console database:users up && php bin/console database:users seed` - Create the table `hfx_users` and populate it
 - - `php bin/console database:users down` - Drop the table `hfx_users`
@@ -128,6 +133,7 @@
 - - `npm run js-build-watch` : compile JS in *watch mode*
 - **Tested demo URL** :
 - - http://helifox.local/
+- - http://helifox.local/?fb_click=FB_ID&utm=UTM_ID&gtm=GTM_ID
 - - http://helifox.local/content/5/fx/?action=cancel
 - - http://helifox.local/content/5/fx/player?action=cancel
 - - http://helifox.local/content/5/this-is-a-demo-url-a555&XX7
