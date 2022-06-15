@@ -1,5 +1,8 @@
 # HFX v4
 
+![Maintainer](https://img.shields.io/badge/maintainer-fadilxcoder-blue)  [![Windows](https://svgshare.com/i/ZhY.svg)](https://svgshare.com/i/ZhY.svg)
+
+<img src="https://raw.githubusercontent.com/MikeCodesDotNET/ColoredBadges/master/svg/dev/languages/php.svg" alt="php" style="max-width: 100%;"> <img src="https://raw.githubusercontent.com/MikeCodesDotNET/ColoredBadges/master/svg/dev/frameworks/nodejs.svg" alt="nodejs" style="max-width: 100%;">
 ---
 
 ## Notes
@@ -101,8 +104,13 @@
 - https://packagist.org/packages/symfony/asset
 - https://packagist.org/packages/tracy/tracy - `Debugger`
 - https://packagist.org/packages/filp/whoops - `Debugger`
-- https://packagist.org/packages/fzaninotto/faker - `Dummy data provider`
+- https://packagist.org/packages/fakerphp/faker // https://fakerphp.github.io/ - `Dummy data provider`
 - https://packagist.org/packages/mnapoli/silly - `CLI`
+
+## Development utilities
+
+- https://picocss.com/ `Minimal CSS Framework for semantic HTML`
+- https://picocss.com/examples/preview/ & https://github.com/picocss/examples `Pico examples`
 
 
 ## Environment configuration
@@ -131,9 +139,13 @@
 - - `npm run js-build` : compile JS
 - - `npm run css-build` : compile CSS
 - - `npm run js-build-watch` : compile JS in *watch mode*
-- **Tested demo URL** :
+
+## Demo URL
 - - http://helifox.local/
 - - http://helifox.local/?fb_click=FB_ID&utm=UTM_ID&gtm=GTM_ID
 - - http://helifox.local/content/5/fx/?action=cancel
 - - http://helifox.local/content/5/fx/player?action=cancel
 - - http://helifox.local/content/5/this-is-a-demo-url-a555&XX7
+- - http://helifox.local/any-thing-url
+- - http://helifox.local/user
+- - http://helifox.local/users

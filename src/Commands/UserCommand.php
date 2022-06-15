@@ -48,6 +48,8 @@ class UserCommand
     {
         $faker = Factory::create();
 
+        $this->usersRepository->cleanTable();
+
         for ($i=0; $i<25; $i++) :
             $this->usersRepository->insertUser(
                 [

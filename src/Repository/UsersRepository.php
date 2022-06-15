@@ -105,6 +105,15 @@ class UsersRepository extends Repository
         $this->db->exec($query);
     }
 
+    public function cleanTable()
+    {
+        $query = '
+            TRUNCATE `hfx_users`;
+        ';
+
+        $this->db->exec($query);
+    }
+
     public function dropTable()
     {
         $query = '
