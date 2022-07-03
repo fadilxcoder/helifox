@@ -149,3 +149,4 @@
 - - http://helifox.local/any-thing-url
 - - http://helifox.local/user
 - - http://helifox.local/users
+- - http://helifox.local/?XDEBUG_SESSION_START=start (Xdebug)
