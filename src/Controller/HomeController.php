@@ -14,6 +14,8 @@ class HomeController extends Controller
     public function index()
     {
         ChromePhp::log('hello world');
+        ChromePhp::log($_SERVER);
+        ChromePhp::warn('something went wrong!');
         
         return $this->render(self::LP, [
             'txt_1' => 132465,
