@@ -30,12 +30,13 @@ class UserController extends Controller
         ]);
     }
 
-    public function displayUsers(UsersRepository $usersRepository, User $user)
+    public function displayUsers(UsersRepository $usersRepository)
     {
         $results = (array) $usersRepository->getUsers();
         $ai = new ArrayIterator();
 
         foreach ($results as $result) {
+            $user = new User();
             $user->setId($result->id_user);
             $user->setUuid($result->uuid);
             $user->setUsername($result->username);

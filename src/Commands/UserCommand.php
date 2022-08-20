@@ -2,64 +2,40 @@
 
 namespace App\Commands;
 
-use App\Services\UserService;
-use Faker\Factory as Factory;
 use App\Repository\UsersRepository;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class UserCommand
 {
-    private $usersRepository, $userService;
+    private $usersRepository;
 
     public function __construct(
-        UsersRepository $usersRepository, 
-        UserService $userService
+        UsersRepository $usersRepository
     ) {
         $this->usersRepository = $usersRepository;
-        $this->userService = $userService;
     }
 
     public function __invoke(InputInterface $input, OutputInterface $output)
     {
-        $action = $input->getArgument('value');
+        $output->writeln("\nBeginning query execution... \n");
 
-        switch ($action)
-        {
-            case 'up':
-                $this->usersRepository->createTable();
-                $output->writeln('Table `hfx_users` created !');
-                break;
-            case 'down':
-                $this->usersRepository->dropTable();
-                $output->writeln('Table `hfx_users` deleted !');
-                break;
-            case 'seed':
-                $this->populateTable();
-                $output->writeln('`hfx_users` populated.');
-                break;
-            default:
-                $output->writeln('Missing arguments !');
-                break;
+        $value = $input->getArgument('value');
+
+        if(empty($value)) {
+            $output->writeln('Missing argument !');
+            return;
         }
-    }
 
-    private function populateTable()
-    {
-        $faker = Factory::create();
+        $result = $this->usersRepository->getUser($value);
 
-        $this->usersRepository->cleanTable();
+        if(empty($result)) {
+            $output->writeln('Not found !');
+            return;
+        }
 
-        for ($i=0; $i<25; $i++) :
-            $this->usersRepository->insertUser(
-                [
-                    "uuid" => $faker->uuid,
-                    "username" => $faker->companyEmail,
-                    "name" => $faker->name,
-                    "password" => $this->userService->encryptUserPassword("admin"),
-                    "last_login" => $faker->date($format = 'Y-m-d', $max = 'now'),
-                ]
-            );
-        endfor;
+        dump($result);
+
+        $output->writeln("\nQuery executed ! \n");
     }
 }

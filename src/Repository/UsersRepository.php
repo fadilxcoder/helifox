@@ -12,7 +12,7 @@ class UsersRepository extends Repository
             SELECT 
                 u.*
             FROM 
-                `hfx_users` u
+                `users` u
             WHERE
                 u.uuid LIKE :value
             ORDER BY
@@ -30,7 +30,7 @@ class UsersRepository extends Repository
             SELECT 
                 u.*
             FROM 
-                `hfx_users` u
+                `users` u
             WHERE
                 u.id_user = :id
         ';
@@ -44,7 +44,7 @@ class UsersRepository extends Repository
     {
         $query = '
             UPDATE 
-                `hfx_users` 
+                `users` 
             SET 
                 last_login = :last_login 
             WHERE 
@@ -61,7 +61,7 @@ class UsersRepository extends Repository
     {
         $query = '
             INSERT INTO 
-                `hfx_users` (
+                `users` (
                     uuid,
                     username,
                     name,
@@ -85,41 +85,5 @@ class UsersRepository extends Repository
             'password' => $user['password'],
             'last_login' => $user['last_login'],
         ]);
-    }
-
-    public function createTable()
-    {
-        $query = '
-            DROP TABLE IF EXISTS `hfx_users`;
-            CREATE TABLE `hfx_users` (
-            `id_user` int(11) NOT NULL AUTO_INCREMENT,
-            `uuid` varchar(255) NOT NULL,
-            `username` varchar(45) DEFAULT NULL,
-            `name` varchar(255) DEFAULT NULL,
-            `password` varchar(255) DEFAULT NULL,
-            `last_login` datetime DEFAULT NULL,
-            PRIMARY KEY (`id_user`)
-            ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
-        ';
-
-        $this->db->exec($query);
-    }
-
-    public function cleanTable()
-    {
-        $query = '
-            TRUNCATE `hfx_users`;
-        ';
-
-        $this->db->exec($query);
-    }
-
-    public function dropTable()
-    {
-        $query = '
-            DROP TABLE IF EXISTS `hfx_users`;
-        ';
-
-        $this->db->exec($query);
     }
 }
