@@ -22,6 +22,7 @@
         "nikic/fast-route": "^1.3",
         "mnapoli/silly": "^1.7",
         "ghost-dvlpr/chrome-php": "dev-master",
+        "ghost-dvlpr/memcache-gui": "dev-master",
         "fakerphp/faker": "^1.19",
         "robmorgan/phinx": "^0.12.12"
     },
@@ -32,6 +33,10 @@
         {
             "type": "path",
             "url": "./packages/chrome"
+        },
+        {
+            "type": "path",
+            "url": "./packages/memcache"
         }
     ]    
 }
