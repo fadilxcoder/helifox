@@ -25,6 +25,8 @@ services:
       - database
     volumes:
       - ./www:/var/www/html
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
 
   apache2:
     container_name: hfx_apache_2
