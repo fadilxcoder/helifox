@@ -2,11 +2,18 @@
 
 {% block title %}Content{% endblock %}
 
+{% block stylesheet %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+{% endblock %}
+
 {% block body %}
+<main class="container">
     <pre>
         {{ dump(user)}}
     </pre>
-     {% for _user in users %}
+    {% for _user in users %}
         <li>{{ _user.username|e }}</li>
     {% endfor %}
+</main>
 {% endblock %}

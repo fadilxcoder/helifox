@@ -2,6 +2,11 @@
 
 {% block title %}Hola{% endblock %}
 
+{% block stylesheet %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://unpkg.com/@picocss/pico@latest/css/pico.min.css">
+{% endblock %}
+
 {% block body %}
     <ul>
         <li>{{ txt_1 }}</li>

@@ -5,7 +5,7 @@ services:
   database:
     container_name: hfx_database
     build:
-      context: ./database
+      context: ./docker/database
     environment:
       - MYSQL_DATABASE=mydb
       - MYSQL_USER=myuser
@@ -14,24 +14,24 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./database/data.sql:/docker-entrypoint-initdb.d/data.sql
-      - ./database/data:/var/lib/mysql
+      - ./docker/database/data.sql:/docker-entrypoint-initdb.d/data.sql
+      - ./docker/database/data:/var/lib/mysql
 
   php-fpm:
     container_name: hfx_php_fpm
     build:
-      context: ./php-fpm
+      context: ./docker/php-fpm
     depends_on:
       - database
     volumes:
-      - ../www:/var/www/html
+      - ./www:/var/www/html
 
   apache2:
     container_name: hfx_apache_2
     build:
-      context: ./apache
+      context: ./docker/apache
     volumes:
-      - ../www:/var/www/html
+      - ./www:/var/www/html
     ports:
       - "8881:80"
       - "8882:443"
@@ -49,5 +49,8 @@ services:
     depends_on:
       - database
     
-
-  
+  memcached:
+    image: memcached
+    container_name: hfx_memcached
+    ports:
+      - "11211:11211"

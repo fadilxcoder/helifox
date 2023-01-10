@@ -1,5 +1,8 @@
-# HFX v4
+# PHP framework with Phinx
 
+![Maintainer](https://img.shields.io/badge/maintainer-fadilxcoder-blue)  [![Windows](https://svgshare.com/i/ZhY.svg)](https://svgshare.com/i/ZhY.svg)
+
+<img src="https://raw.githubusercontent.com/MikeCodesDotNET/ColoredBadges/master/svg/dev/languages/php.svg" alt="php" style="max-width: 100%;"> <img src="https://raw.githubusercontent.com/MikeCodesDotNET/ColoredBadges/master/svg/dev/frameworks/nodejs.svg" alt="nodejs" style="max-width: 100%;">
 ---
 
 ## Notes
@@ -20,6 +23,19 @@
 - `.env` - configuration / environmental variables
 - Uses node - webpack - compilation of assets
 - `public/dist` for compiled assets
+
+---
+
+## Phinx
+
+- Create a migration : `vendor/bin/phinx create UsersMigration`
+- Add SQL to created migration
+- Migrate data : `vendor/bin/phinx migrate`
+- Create newly created seeding : `vendor/bin/phinx seed:create UserSeeder`
+- Seed data : `vendor/bin/phinx seed:run`
+- `vendor/bin/phinx migrate -t 20220820174815 & vendor/bin/phinx seed:run -s UserSeeder` - Specific migration / seeder
+
+---
 
 ### Routing notes
 
@@ -71,6 +87,12 @@
 > `// Matches /user/foo/bar as well`
 > `$r->addRoute('GET', '/user/{name:.+}', 'handler');`
 
+<br>
+
+`'/[{extra}]'` : Allowing `<URL>/?fb_click=FB_ID&utm=UTM_ID&gtm=GTM_ID` & `<URL>/`
+
+---
+
 ### Routing Regex
 
 - The rules : `'/content/{id:\d+}/{slug:[a-z]+}[/{extra}]'`
@@ -86,7 +108,9 @@
 - - `&` *ampersand*
 - Finally : `{slug:[a-zA-Z0-9-_&]+}`
 
-## Packages (require / require-dev)
+---
+
+## Packages (require / require-dev) / URLs
 
 - https://packagist.org/packages/nikic/fast-route - `Routes`
 - https://packagist.org/packages/symfony/http-kernel
@@ -97,9 +121,18 @@
 - https://packagist.org/packages/symfony/asset
 - https://packagist.org/packages/tracy/tracy - `Debugger`
 - https://packagist.org/packages/filp/whoops - `Debugger`
-- https://packagist.org/packages/fzaninotto/faker - `Dummy data provider`
+- https://packagist.org/packages/fakerphp/faker // https://fakerphp.github.io/ - `Dummy data provider`
 - https://packagist.org/packages/mnapoli/silly - `CLI`
+- https://book.cakephp.org/phinx/0/en/contents.html - `Phinx Documentation`
 
+---
+
+## Development utilities
+
+- https://picocss.com/ `Minimal CSS Framework for semantic HTML`
+- https://picocss.com/examples/preview/ & https://github.com/picocss/examples `Pico examples`
+
+---
 
 ## Environment configuration
 
@@ -112,22 +145,35 @@
 </VirtualHost>
 ```
 
+---
+
 ## Usage
 
 - Set up `vhosts`
 - Configure `.env`
 - `composer install`
+- `composer update` when modifying specific **packages** - *PS. `packages/chrome/`, `"version": "master"` in `composer.json`*
 - DB tables :
-- - `php bin/console database:users up && php bin/console database:users seed` - Create the table `hfx_users` and populate it
-- - `php bin/console database:users down` - Drop the table `hfx_users`
+- - `vendor/bin/phinx migrate` - Migrate DB
+- - `vendor/bin/phinx seed:run` - Popupate DB
+- Command : `php bin/console database:users 1 / php bin/console database:users 155` - Fetching data from `users` with specified ID
 - Assets `npm install`
 - `npm rebuild node-sass` - Changing environment
 - Compiling assets 
 - - `npm run js-build` : compile JS
 - - `npm run css-build` : compile CSS
 - - `npm run js-build-watch` : compile JS in *watch mode*
-- **Tested demo URL** :
+
+---
+
+## Demo URL for testing
+
 - - http://helifox.local/
+- - http://helifox.local/?fb_click=FB_ID&utm=UTM_ID&gtm=GTM_ID
 - - http://helifox.local/content/5/fx/?action=cancel
 - - http://helifox.local/content/5/fx/player?action=cancel
 - - http://helifox.local/content/5/this-is-a-demo-url-a555&XX7
+- - http://helifox.local/any-thing-url
+- - http://helifox.local/user
+- - http://helifox.local/users
+- - http://helifox.local/?XDEBUG_SESSION_START=start (Xdebug)

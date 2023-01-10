@@ -1,3 +1,4 @@
 /.c9
 /docker/database/data
 /www/php_error_log
+/.vscode

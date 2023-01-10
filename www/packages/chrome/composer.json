@@ -1,0 +1,21 @@
+{
+    "name": "ghost-dvlpr/chrome-php",
+    "description": "Chrome Logger",
+    "version": "master",
+    "type": "package",
+    "require": {
+        "php": ">=7.2.0"
+    },
+    "license": "mit",
+    "authors": [
+        {
+            "name": "Fadil",
+            "email": "fadil@xcoder.dvlpr",
+            "homepage": "https://github.com/fadilxcoder"
+        }
+    ],
+    "minimum-stability": "stable",
+    "autoload": {
+        "psr-4": {"Packages\\Chrome\\": "src/"}
+    }
+}
