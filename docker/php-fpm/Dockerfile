@@ -5,7 +5,9 @@ ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/do
 RUN chmod uga+x /usr/local/bin/install-php-extensions && sync && \
     install-php-extensions gd xdebug pdo_mysql mysqli memcache
 
-RUN docker-php-ext-install dba
+RUN apk add libzip-dev
+
+RUN docker-php-ext-install dba zip
     
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 

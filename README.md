@@ -189,3 +189,17 @@
 - - http://helifox.local:8881/user
 - - http://helifox.local:8881/users
 - - http://helifox.local:8881/?XDEBUG_SESSION_START=start (Xdebug)
+
+# Selenium integration
+
+```bash
+/var/www/html # ./vendor/bin/phpunit ./tests/Selenium/GoogleSearchChromeTest.php
+Cannot load Xdebug - it was already loaded
+PHPUnit 9.6.3 by Sebastian Bergmann and contributors.
+
+.                                                                   1 / 1 (100%)Welcome | HFX
+
+Time: 00:05.654, Memory: 6.00 MB
+
+OK (1 test, 1 assertion)   
+```
