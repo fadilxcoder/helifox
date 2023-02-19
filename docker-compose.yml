@@ -56,3 +56,11 @@ services:
     container_name: hfx_memcached
     ports:
       - "11211:11211"
+
+  selenium-chrome:
+    container_name: hfx_slnm_chrome
+    image: selenium/standalone-chrome
+    ports:
+      - 4445:4444
+    links:
+      - "php-fpm"
