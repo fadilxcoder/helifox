@@ -1,6 +1,6 @@
 # PHP framework with Phinx
 
-![Maintainer](https://img.shields.io/badge/maintainer-fadilxcoder-blue)  [![Windows](https://svgshare.com/i/ZhY.svg)](https://svgshare.com/i/ZhY.svg)
+![Maintainer](https://img.shields.io/badge/maintainer-fadilxcoder-blue)
 
 <img src="https://raw.githubusercontent.com/MikeCodesDotNET/ColoredBadges/master/svg/dev/languages/php.svg" alt="php" style="max-width: 100%;"> <img src="https://raw.githubusercontent.com/MikeCodesDotNET/ColoredBadges/master/svg/dev/frameworks/nodejs.svg" alt="nodejs" style="max-width: 100%;">
 ---
