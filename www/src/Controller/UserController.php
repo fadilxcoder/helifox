@@ -5,7 +5,6 @@ namespace App\Controller;
 use DateTime;
 use App\Dto\User;
 use App\Core\Controller;
-use Packages\Chrome\ChromePhp;
 use App\Repository\UsersRepository;
 use ArrayIterator;
 
@@ -22,8 +21,6 @@ class UserController extends Controller
         $user->setUsername($result->username);
         $user->setName($result->name);
         $user->setLastLogin(new DateTime($result->last_login));
-
-        ChromePhp::log($user);
 
         echo json_encode([
             'HTTP' => 'OK - check chrome logger',

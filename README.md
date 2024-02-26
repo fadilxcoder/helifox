@@ -1,4 +1,4 @@
-# PHP framework with Phinx
+# PHP Micro Framework with Phinx
 
 ![Maintainer](https://img.shields.io/badge/maintainer-fadilxcoder-blue)
 
@@ -134,22 +134,8 @@
 
 ---
 
-## Environment configuration
-
-- **httpd-vhosts.conf**
-
-```
-<VirtualHost *:80>
-	ServerName helifox.local
-	DocumentRoot c:/wamp64/www/helifox/public/
-</VirtualHost>
-```
-
----
-
 ## Usage
 
-- Set up `vhosts`
 - Configure `.env`
 - `composer install`
 - `composer update` when modifying specific **packages** - *PS. `packages/chrome/`, `"version": "master"` in `composer.json`*
@@ -175,8 +161,6 @@
 - - USERNMAE : `myuser`
 - - PASSWORD : `secret`
 - - DATABASE : `mydb`
-- Memcache
-- - URL : http://helifox.local:8881/memcache-gui (admin / admin)
 
 ## Demo URL for testing
 

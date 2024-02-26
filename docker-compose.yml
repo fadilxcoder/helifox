@@ -3,14 +3,14 @@ version: '3'
 services:
 
   database:
-    container_name: hfx_database
+    container_name: helifox_database
     build:
       context: ./docker/database
     environment:
       - MYSQL_DATABASE=mydb
       - MYSQL_USER=myuser
       - MYSQL_PASSWORD=secret
-      - MYSQL_ROOT_PASSWORD=docker
+      - MYSQL_ROOT_PASSWORD=secret
     ports:
       - "3306:3306"
     volumes:
@@ -18,7 +18,7 @@ services:
       - ./docker/database/data:/var/lib/mysql
 
   php-fpm:
-    container_name: hfx_php_fpm
+    container_name: helifox_php_fpm
     build:
       context: ./docker/php-fpm
     depends_on:
@@ -29,7 +29,7 @@ services:
       - "host.docker.internal:host-gateway"
 
   apache2:
-    container_name: hfx_apache_2
+    container_name: helifox_apache_2
     build:
       context: ./docker/apache
     volumes:
@@ -41,7 +41,7 @@ services:
       - php-fpm
 
   phpmyadmin:
-    container_name: hfx_pma
+    container_name: helifox_phpmyadmin
     image: phpmyadmin/phpmyadmin:latest
     ports:
       - 8000:80
@@ -50,9 +50,3 @@ services:
       - PMA_HOST=database
     depends_on:
       - database
-    
-  memcached:
-    image: memcached
-    container_name: hfx_memcached
-    ports:
-      - "11211:11211"
