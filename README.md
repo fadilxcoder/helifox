@@ -143,6 +143,8 @@
 - - `vendor/bin/phinx migrate` - Migrate DB
 - - `vendor/bin/phinx seed:run` - Popupate DB
 - Command : `php bin/console database:users 1 / php bin/console database:users 155` - Fetching data from `users` with specified ID
+
+_deprecated in latest release_
 - Assets `npm install`
 - `npm rebuild node-sass` - Changing environment
 - Compiling assets 
