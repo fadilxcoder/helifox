@@ -26,11 +26,11 @@ class Client implements ClientResolverInterface
         switch ($route[0]) 
         {
             case \FastRoute\Dispatcher::NOT_FOUND:
-                $this->container->call('App\\Controller\\Error\\BadRequest::NOT_FOUND');
+                $this->container->call('App\\Core\\Error\\BadRequest::NOT_FOUND');
                 break;
 
             case \FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
-                $this->container->call('App\\Controller\\Error\\BadRequest::METHOD_NOT_ALLOWED');
+                $this->container->call('App\\Core\\Error\\BadRequest::METHOD_NOT_ALLOWED');
                 break;
 
             case \FastRoute\Dispatcher::FOUND:
@@ -40,7 +40,7 @@ class Client implements ClientResolverInterface
                 break;
             
             default:
-                $this->container->call('App\\Controller\\Error\\BadRequest::UNKNOWN');
+                $this->container->call('App\\Core\\Error\\BadRequest::UNKNOWN');
                 break;
         }
     }

@@ -1,9 +1,12 @@
 <?php
 
-namespace App\Controller\Error;
+namespace App\Core\Error;
 
 use App\Core\Controller;
 
+/**
+ * Class used in src/Client.php
+ */
 class BadRequest extends Controller
 {
     public static function NOT_FOUND()

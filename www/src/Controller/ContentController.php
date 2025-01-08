@@ -8,6 +8,9 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ContentController extends Controller
 {
+    /**
+     * $routes->addRoute('GET', '/content/{id:\d+}/{slug:[a-zA-Z0-9-_&]+}[/{extra}]', [ContentController::class, 'show']);
+     */
     public function show($id, Request $request, $slug, UsersRepository $usersRepository)
     {
         # $usersRepository->getUsers();

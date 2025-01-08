@@ -1,4 +1,4 @@
-# PHP Micro Framework with Phinx
+# HFX PHP Framework / Phinx
 
 ![Maintainer](https://img.shields.io/badge/maintainer-fadilxcoder-blue)
 

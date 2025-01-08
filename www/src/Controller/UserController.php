@@ -12,6 +12,9 @@ class UserController extends Controller
 {
     private const USER_ID = 4;
 
+    /**
+     * $routes->addRoute('GET', '/user', [UserController::class, 'displayUser']);
+     */
     public function displayUser(UsersRepository $usersRepository, User $user)
     {
         $result = (object) $usersRepository->getUser(self::USER_ID);
@@ -27,6 +30,9 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+     * $routes->addRoute(['GET', 'POST'], '/users', [UserController::class, 'displayUsers']);
+     */
     public function displayUsers(UsersRepository $usersRepository)
     {
         $results = (array) $usersRepository->getUsers();

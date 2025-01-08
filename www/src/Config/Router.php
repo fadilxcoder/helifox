@@ -11,10 +11,14 @@ class Router
     {
         # Routes
         return \FastRoute\simpleDispatcher(function (RouteCollector $routes) {
+
             $routes->addRoute('GET', '/content/{id:\d+}/{slug:[a-zA-Z0-9-_&]+}[/{extra}]', [ContentController::class, 'show']);
+
             $routes->addRoute('GET', '/user', [UserController::class, 'displayUser']);
+
             $routes->addRoute(['GET', 'POST'], '/users', [UserController::class, 'displayUsers']);
-            $routes->addRoute('GET', '/[{extra}]', [HomeController::class, 'index']);
+
+            $routes->addRoute(['GET', 'POST'], '/[{extra}]', [HomeController::class, 'index']);
         });
     }
 }
