@@ -1,23 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Core;
 
-use \Twig\Environment;
-use App\Core\Twig as TwigEnv;
+use Twig\Environment;
+use Symfony\Component\HttpFoundation\Response;
 
 class Controller
 {
-    private $twig, $twigEnv;
-
     public function __construct(
-        Environment $twig, 
-        TwigEnv $twigEnv
-    ) {
-        $this->twig = $twig;
-        $this->twigEnv = $twigEnv;
-    }
+        protected Environment $twig,
+        protected Twig $twigEnv
+    ) {}
 
-    public function render(string $view, array $parameters = [])
+    public function render(string $view, array $parameters = []): void
     {
         $parameters['app'] = [
             'uri' => $this->twigEnv->appUri(),
@@ -28,11 +25,19 @@ class Controller
         echo $this->twig->render($view, $parameters);
     }
 
-    public function redirectTo(String $url)
+    public function redirectTo(string $url): void
     {
         header('Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0');
         header('Pragma: no-cache');
         header('Location: ' . $this->twigEnv->appUri() . $url);
-        return;
+    }
+
+    protected function json(mixed $data, int $statusCode = 200): Response
+    {
+        return new Response(
+            json_encode($data, JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES),
+            $statusCode,
+            ['Content-Type' => 'application/json']
+        );
     }
 }

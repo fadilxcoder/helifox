@@ -1,9 +1,9 @@
-FROM php:8.3-fpm-alpine
+FROM php:8.4-fpm-alpine
 
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
 RUN chmod uga+x /usr/local/bin/install-php-extensions && sync && \
-    install-php-extensions gd xdebug pdo_mysql mysqli memcache
+    install-php-extensions gd xdebug pdo_mysql mysqli
 
 RUN docker-php-ext-install dba
     

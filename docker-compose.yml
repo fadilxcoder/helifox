@@ -1,4 +1,4 @@
-version: '3'
+version: '3.8'
 
 services:
 
@@ -16,17 +16,25 @@ services:
     volumes:
       - ./docker/database/data.sql:/docker-entrypoint-initdb.d/data.sql
       - ./docker/database/data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   php-fpm:
     container_name: helifox_php_fpm
     build:
       context: ./docker/php-fpm
     depends_on:
-      - database
+      database:
+        condition: service_healthy
     volumes:
       - ./www:/var/www/html
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    environment:
+      - PHP_VERSION=8.4
 
   apache2:
     container_name: helifox_apache_2
@@ -48,5 +56,7 @@ services:
     environment:
       - PMA_ARBITRARY=1
       - PMA_HOST=database
+      - PMA_USER=myuser
+      - PMA_PASSWORD=secret
     depends_on:
       - database
