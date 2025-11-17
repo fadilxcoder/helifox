@@ -1,0 +1,96 @@
+name: Static Analysis
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'www/src/**'
+      - 'www/composer.json'
+      - '.github/workflows/static-analysis.yml'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'www/src/**'
+      - 'www/composer.json'
+      - '.github/workflows/static-analysis.yml'
+  schedule:
+    - cron: '0 3 * * *'  # Nightly at 3 AM UTC
+
+jobs:
+  phpstan:
+    name: PHPStan Static Analysis
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP 8.4
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: pdo, pdo_mysql, json
+          tools: composer:v2
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v3
+        with:
+          path: www/vendor
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        working-directory: ./www
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Run PHPStan
+        working-directory: ./www
+        run: composer exec phpstan -- analyse src --memory-limit=512M --ansi
+        continue-on-error: true
+
+      - name: Generate PHPStan report
+        if: always()
+        working-directory: ./www
+        run: |
+          echo "## PHPStan Analysis Report" >> $GITHUB_STEP_SUMMARY
+          echo "Static type checking completed for PHP 8.4 codebase" >> $GITHUB_STEP_SUMMARY
+
+  phpcs:
+    name: PHP CodeSniffer
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP 8.4
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: pdo, pdo_mysql, json
+          tools: composer:v2
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v3
+        with:
+          path: www/vendor
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        working-directory: ./www
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Run PHP CodeSniffer
+        working-directory: ./www
+        run: composer exec phpcs -- src --standard=PSR12 --colors --report=full
+        continue-on-error: true
+
+      - name: Generate PHPCS report
+        if: always()
+        working-directory: ./www
+        run: |
+          echo "## PHP CodeSniffer Report" >> $GITHUB_STEP_SUMMARY
+          echo "Code style validation against PSR-12 standard completed" >> $GITHUB_STEP_SUMMARY

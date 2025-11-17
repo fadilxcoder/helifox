@@ -1,0 +1,55 @@
+includes:
+  - vendor/phpstan/phpstan-strict-rules/rules.neon
+
+parameters:
+  level: 9
+  paths:
+    - src
+    - tests
+  
+  # PHP 8.4 configuration
+  phpVersion: 80400
+  
+  # Strict rules configuration
+  strictTypes:
+    enabled: true
+  
+  # Error handling
+  reportUnmatchedIgnoredErrors: false
+  treatPhpDocTypesAsCertain: false
+  treatPhpDocTypesAsCertainTruthy: false
+  
+  # Ignored paths
+  excludePaths:
+    - vendor
+    - var
+    - public
+  
+  # Type covariance
+  checkTypeHintWrongVariableName: true
+  
+  # Union types checking
+  unionTypes:
+    enabled: true
+  
+  # Implicit rules
+  implicitRules:
+    - classConstantsHaveTypes: true
+    - noUnnecessaryNullableTypePropertyOverride: true
+    - requireOneLineDocComment: false
+  
+  # Generics
+  generics:
+    enabled: true
+  
+  # Type narrowing
+  typeAliases: ~
+  
+  # Custom rules paths
+  customRulesPaths: []
+  
+  # Bootstrap file for tests
+  bootstrap: tests/bootstrap.php
+  
+  # Memory limit
+  memoryLimit: 512M

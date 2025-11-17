@@ -1,0 +1,85 @@
+name: PHPUnit Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+    paths:
+      - 'www/**'
+      - '.github/workflows/tests.yml'
+      - 'docker/**'
+  pull_request:
+    branches: [ main, develop ]
+    paths:
+      - 'www/**'
+      - '.github/workflows/tests.yml'
+      - 'docker/**'
+  schedule:
+    - cron: '0 2 * * *'  # Nightly at 2 AM UTC
+
+jobs:
+  phpunit:
+    name: PHPUnit Tests (PHP 8.4)
+    runs-on: ubuntu-latest
+    
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: helifox_test
+        options: >-
+          --health-cmd="mysqladmin ping -uroot -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+        ports:
+          - 3306:3306
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup PHP 8.4
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: pdo, pdo_mysql, json, curl
+          tools: composer:v2
+          coverage: pcov
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v3
+        with:
+          path: www/vendor
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        working-directory: ./www
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Create test environment file
+        working-directory: ./www
+        run: cp .env.example .env.test || echo "DEBUG=true" > .env.test
+
+      - name: Run PHPUnit tests
+        working-directory: ./www
+        run: composer exec phpunit -- --testdox --coverage-html coverage --coverage-text
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          files: ./www/coverage/coverage.xml
+          flags: unittests
+          name: codecov-umbrella
+          fail_ci_if_error: false
+
+      - name: Generate test report
+        if: always()
+        working-directory: ./www
+        run: |
+          if [ -d "coverage" ]; then
+            echo "## Test Coverage Report" >> $GITHUB_STEP_SUMMARY
+            echo "Coverage HTML report: [View Report](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }})" >> $GITHUB_STEP_SUMMARY
+          fi
