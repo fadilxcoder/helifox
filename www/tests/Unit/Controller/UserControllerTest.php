@@ -26,12 +26,14 @@ class UserControllerTest extends TestCase
 
     public function testDisplayUserMethodIsCallable(): void
     {
-        $this->assertTrue(is_callable([UserController::class, 'displayUser']));
+        $reflection = new \ReflectionMethod(UserController::class, 'displayUser');
+        $this->assertTrue($reflection->isPublic());
     }
 
     public function testDisplayUsersMethodIsCallable(): void
     {
-        $this->assertTrue(is_callable([UserController::class, 'displayUsers']));
+        $reflection = new \ReflectionMethod(UserController::class, 'displayUsers');
+        $this->assertTrue($reflection->isPublic());
     }
 
     public function testDisplayUserMethodReturnsVoid(): void

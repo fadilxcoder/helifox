@@ -52,7 +52,7 @@ class PipelineVerificationTest extends TestCase
      */
     public function testGithubActionsWorkflowsExist(): void
     {
-        $workflowsDir = __DIR__ . '/../../.github/workflows';
+        $workflowsDir = __DIR__ . '/../../../../.github/workflows';
         
         $this->assertTrue(is_dir($workflowsDir), 'Workflows directory should exist');
         $this->assertFileExists($workflowsDir . '/tests.yml');

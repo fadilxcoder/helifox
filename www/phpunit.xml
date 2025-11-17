@@ -22,7 +22,7 @@
         </include>
     </source>
 
-    <coverage processUncoveredFiles="true">
+    <coverage>
         <report>
             <html outputDirectory="build/coverage"/>
             <text outputFile="php://stdout" showUncoveredFiles="true"/>

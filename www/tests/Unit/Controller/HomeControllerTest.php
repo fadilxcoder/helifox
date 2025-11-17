@@ -22,7 +22,8 @@ class HomeControllerTest extends TestCase
 
     public function testIndexMethodIsCallable(): void
     {
-        $this->assertTrue(is_callable([HomeController::class, 'index']));
+        $reflection = new \ReflectionMethod(HomeController::class, 'index');
+        $this->assertTrue($reflection->isPublic());
     }
 
     public function testIndexMethodAcceptsRequest(): void
