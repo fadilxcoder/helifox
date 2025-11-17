@@ -21,7 +21,8 @@ class ContentControllerTest extends TestCase
 
     public function testShowMethodIsCallable(): void
     {
-        $this->assertTrue(is_callable([ContentController::class, 'show']));
+        $reflection = new \ReflectionMethod(ContentController::class, 'show');
+        $this->assertTrue($reflection->isPublic());
     }
 
     public function testShowMethodHasCorrectParameters(): void
