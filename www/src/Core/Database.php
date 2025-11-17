@@ -1,48 +1,61 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Core;
 
 class Database
 {
-    private $pdo;
+    private \PDO $pdo;
 
     public function __construct(string $dbName, string $dbHost, string $dbUser, string $dbPassword)
     {
         try {
-            $this->pdo = new \PDO("mysql:dbname=$dbName;host=$dbHost", $dbUser, $dbPassword);
+            $dsn = sprintf('mysql:dbname=%s;host=%s;charset=utf8mb4', $dbName, $dbHost);
+            $this->pdo = new \PDO(
+                $dsn,
+                $dbUser,
+                $dbPassword,
+                [
+                    \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
+                    \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
+                    \PDO::ATTR_EMULATE_PREPARES => false,
+                ]
+            );
         } catch (\PDOException $e) {
-            throw new \Exception($e->getMessage());
+            throw new \RuntimeException('Database connection failed: ' . $e->getMessage(), 0, $e);
         }
     }
 
     /**
-     * FindAll - FETCH_OBJ / FETCH_ASSOC / FETCH_NUM 
+     * Fetch all records
      *
      * @param string $query
      * @param array $params
-     * @return void
+     * @return array
      */
-    public function findAll(string $query, array $params = [])
+    public function findAll(string $query, array $params = []): array
     {
         $stmt = $this->pdo->prepare($query);
         $stmt->execute($params);
 
-        return $stmt->fetchAll(\PDO::FETCH_OBJ);;
+        return $stmt->fetchAll(\PDO::FETCH_OBJ) ?: [];
     }
 
     /**
-     * FindOne - FETCH_OBJ / FETCH_ASSOC / FETCH_NUM 
+     * Fetch one record
      *
      * @param string $query
      * @param array $params
-     * @return void
+     * @return object|null
      */
-    public function findOne(string $query, array $params = [])
+    public function findOne(string $query, array $params = []): ?object
     {
         $stmt = $this->pdo->prepare($query);
         $stmt->execute($params);
 
-        return $stmt->fetch(\PDO::FETCH_OBJ);
+        $result = $stmt->fetch(\PDO::FETCH_OBJ);
+        return $result ?: null;
     }
 
     /**
@@ -50,21 +63,33 @@ class Database
      *
      * @param string $query
      * @param array $params
-     * @return void
+     * @return int
      */
-    public function update(string $query, array $params = [])
+    public function update(string $query, array $params = []): int
     {
-        $this->pdo->prepare($query)->execute($params);
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute($params);
+        return $stmt->rowCount();
     }
 
     /**
      * Run SQL query directly
      *
      * @param string $query
-     * @return void
+     * @return int
      */
-    public function exec(string $query)
+    public function exec(string $query): int
     {
-        $this->pdo->exec($query);
+        return $this->pdo->exec($query);
+    }
+
+    /**
+     * Get last inserted ID
+     *
+     * @return string
+     */
+    public function lastInsertId(): string
+    {
+        return $this->pdo->lastInsertId();
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Controller;
 
 use DateTime;
@@ -15,7 +17,7 @@ class UserController extends Controller
     /**
      * $routes->addRoute('GET', '/user', [UserController::class, 'displayUser']);
      */
-    public function displayUser(UsersRepository $usersRepository, User $user)
+    public function displayUser(UsersRepository $usersRepository, User $user): void
     {
         $result = (object) $usersRepository->getUser(self::USER_ID);
 
@@ -27,13 +29,13 @@ class UserController extends Controller
 
         echo json_encode([
             'HTTP' => 'OK - check chrome logger',
-        ]);
+        ], JSON_THROW_ON_ERROR | JSON_UNESCAPED_SLASHES);
     }
 
     /**
      * $routes->addRoute(['GET', 'POST'], '/users', [UserController::class, 'displayUsers']);
      */
-    public function displayUsers(UsersRepository $usersRepository)
+    public function displayUsers(UsersRepository $usersRepository): void
     {
         $results = (array) $usersRepository->getUsers();
         $ai = new ArrayIterator();

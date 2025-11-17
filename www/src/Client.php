@@ -1,47 +1,26 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App;
 
-use App\ClientResolverInterface;
 use DI\Container;
 use App\Config\Router;
+use FastRoute\Dispatcher;
 
 class Client implements ClientResolverInterface
 {
-    /**
-     * @var Container
-     */
-    private $container;
+    public function __construct(private Container $container) {}
 
-
-    public function __construct(Container $container)
-    {
-        $this->container = $container;
-    }
-
-    public function execute()
+    public function execute(): void
     {
         $route = Router::config()->dispatch($_SERVER['REQUEST_METHOD'], $_SERVER['REQUEST_URI']);
 
-        switch ($route[0]) 
-        {
-            case \FastRoute\Dispatcher::NOT_FOUND:
-                $this->container->call('App\\Core\\Error\\BadRequest::NOT_FOUND');
-                break;
-
-            case \FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
-                $this->container->call('App\\Core\\Error\\BadRequest::METHOD_NOT_ALLOWED');
-                break;
-
-            case \FastRoute\Dispatcher::FOUND:
-                $controller = $route[1];
-                $parameters = $route[2];
-                $this->container->call($controller, $parameters);
-                break;
-            
-            default:
-                $this->container->call('App\\Core\\Error\\BadRequest::UNKNOWN');
-                break;
-        }
+        match ($route[0]) {
+            Dispatcher::NOT_FOUND => $this->container->call('App\\Core\\Error\\BadRequest::NOT_FOUND'),
+            Dispatcher::METHOD_NOT_ALLOWED => $this->container->call('App\\Core\\Error\\BadRequest::METHOD_NOT_ALLOWED'),
+            Dispatcher::FOUND => $this->container->call($route[1], $route[2]),
+            default => $this->container->call('App\\Core\\Error\\BadRequest::UNKNOWN'),
+        };
     }
 }

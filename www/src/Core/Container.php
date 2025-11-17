@@ -1,18 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Core;
 
+use DI\ContainerBuilder;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
-use \DI\ContainerBuilder as ContainerBuilder;
-use App\Core\Database as Database;
 use Symfony\Component\HttpFoundation\Request;
+
 class Container
 {
-    public static function init()
+    public static function init(): \DI\Container
     {
         $containerBuilder = new ContainerBuilder();
-        $twig_repo = __DIR__ . '/../../' . $_ENV['TWIG_REPO'];
+        $twigRepo = __DIR__ . '/../../' . $_ENV['TWIG_REPO'];
         
         $containerBuilder->addDefinitions(
             [
@@ -27,16 +29,18 @@ class Container
                     \DI\get('database.password')
                 ),
                 Environment::class => \DI\autowire()->constructor(
-                    new FilesystemLoader($twig_repo),
+                    new FilesystemLoader($twigRepo),
                     [
-                        'debug' => true
+                        'debug' => (bool)($_ENV['DEBUG'] ?? false),
+                        'cache' => false,
                     ]
                 ),
+                Request::class => \DI\factory(static function (): Request {
+                    return Request::createFromGlobals();
+                }),
             ]
         );
-        $container = $containerBuilder->build();
-        $container->set(Request::class, Request::createFromGlobals());
 
-        return $container;
+        return $containerBuilder->build();
     }
 }
