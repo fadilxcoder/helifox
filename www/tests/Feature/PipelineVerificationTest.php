@@ -52,23 +52,24 @@ class PipelineVerificationTest extends TestCase
      */
     public function testGithubActionsWorkflowsExist(): void
     {
-        // Find the project root by looking for .github directory
-        $currentDir = __DIR__;
-        $projectRoot = null;
+        // Find the project root by searching up the directory tree for .github
+        $dir = __DIR__;
+        $found = false;
         
         for ($i = 0; $i < 10; $i++) {
-            $testPath = dirname($currentDir, $i) . '/.github/workflows';
-            if (is_dir($testPath)) {
-                $projectRoot = dirname($currentDir, $i);
+            $workflowsDir = $dir . '/.github/workflows';
+            if (is_dir($workflowsDir)) {
+                $found = true;
                 break;
             }
+            $dir = dirname($dir);
         }
         
-        if ($projectRoot === null) {
-            $this->markTestSkipped('Could not locate project root with .github directory');
+        if (!$found) {
+            $this->markTestSkipped('Could not locate .github/workflows directory');
+            return;
         }
         
-        $workflowsDir = $projectRoot . '/.github/workflows';
         $this->assertFileExists($workflowsDir . '/tests.yml', 'tests.yml workflow missing');
         $this->assertFileExists($workflowsDir . '/static-analysis.yml', 'static-analysis.yml workflow missing');
         $this->assertFileExists($workflowsDir . '/docker-build.yml', 'docker-build.yml workflow missing');
