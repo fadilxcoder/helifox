@@ -16,7 +16,7 @@
         "twig/twig": "^3.14",
         "php-di/php-di": "^7.1",
         "nikic/fast-route": "^1.3",
-        "mnapoli/silly": "^2.0",
+        "mnapoli/silly": "^1.9",
         "fakerphp/faker": "^1.24",
         "robmorgan/phinx": "^0.16.0",
         "filp/whoops": "^2.16"

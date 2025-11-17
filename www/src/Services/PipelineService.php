@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Service;
+namespace App\Services;
 
 /**
  * Pipeline service to demonstrate CI/CD functionality
